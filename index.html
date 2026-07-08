@@ -218,7 +218,7 @@
         /* Payment Cards */
         .payment-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 20px;
             margin-bottom: 40px;
         }
@@ -430,20 +430,6 @@
         .percent-medium { color: var(--primary-yellow); }
         .percent-low { color: var(--primary-red); }
         
-        /* Two Column Layout */
-        .two-columns {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        
-        @media (max-width: 1200px) {
-            .two-columns {
-                grid-template-columns: 1fr;
-            }
-        }
-        
         /* Footer */
         .footer {
             text-align: center;
@@ -499,16 +485,16 @@
             
             <div class="kpi-card animate delay-1">
                 <div class="kpi-label">🟪 PR - Sob Demanda</div>
-                <div class="kpi-value purple">54%</div>
+                <div class="kpi-value purple">53%</div>
                 <div class="uf-progress">
                     <div class="progress-bar">
-                        <div class="progress-fill abertas" style="width: 54%"></div>
-                        <div class="progress-fill executadas" style="width: 46%"></div>
+                        <div class="progress-fill abertas" style="width: 53%"></div>
+                        <div class="progress-fill executadas" style="width: 47%"></div>
                     </div>
                 </div>
                 <div class="uf-stats">
-                    <span class="uf-stat"><span class="uf-stat-dot abertas"></span> Abertas: 54%</span>
-                    <span class="uf-stat"><span class="uf-stat-dot executadas"></span> Executadas: 46%</span>
+                    <span class="uf-stat"><span class="uf-stat-dot abertas"></span> Abertas: 53%</span>
+                    <span class="uf-stat"><span class="uf-stat-dot executadas"></span> Executadas: 47%</span>
                 </div>
             </div>
             
@@ -529,16 +515,16 @@
             
             <div class="kpi-card animate delay-3">
                 <div class="kpi-label">🟪 SC - Sob Demanda</div>
-                <div class="kpi-value purple">39%</div>
+                <div class="kpi-value purple">40%</div>
                 <div class="uf-progress">
                     <div class="progress-bar">
-                        <div class="progress-fill abertas" style="width: 39%"></div>
-                        <div class="progress-fill executadas" style="width: 61%"></div>
+                        <div class="progress-fill abertas" style="width: 40%"></div>
+                        <div class="progress-fill executadas" style="width: 60%"></div>
                     </div>
                 </div>
                 <div class="uf-stats">
-                    <span class="uf-stat"><span class="uf-stat-dot abertas"></span> Abertas: 39%</span>
-                    <span class="uf-stat"><span class="uf-stat-dot executadas"></span> Executadas: 61%</span>
+                    <span class="uf-stat"><span class="uf-stat-dot abertas"></span> Abertas: 40%</span>
+                    <span class="uf-stat"><span class="uf-stat-dot executadas"></span> Executadas: 60%</span>
                 </div>
             </div>
         </div>
@@ -587,15 +573,15 @@
                 <div class="payment-stats">
                     <div class="payment-stat">
                         <span class="payment-stat-label">Quantidade:</span>
-                        <span class="payment-stat-value">3.620</span>
+                        <span class="payment-stat-value">3.694</span>
                     </div>
                     <div class="payment-stat">
                         <span class="payment-stat-label">% do Total:</span>
-                        <span class="payment-stat-value">55,5%</span>
+                        <span class="payment-stat-value">56,6%</span>
                     </div>
                     <div class="payment-stat">
                         <span class="payment-stat-label">Sites Únicos:</span>
-                        <span class="payment-stat-value">503</span>
+                        <span class="payment-stat-value">524</span>
                     </div>
                 </div>
             </div>
@@ -608,36 +594,15 @@
                 <div class="payment-stats">
                     <div class="payment-stat">
                         <span class="payment-stat-label">Quantidade:</span>
-                        <span class="payment-stat-value">2.863</span>
+                        <span class="payment-stat-value">2.831</span>
                     </div>
                     <div class="payment-stat">
                         <span class="payment-stat-label">% do Total:</span>
-                        <span class="payment-stat-value">43,9%</span>
+                        <span class="payment-stat-value">43,4%</span>
                     </div>
                     <div class="payment-stat">
                         <span class="payment-stat-label">Sites Únicos:</span>
-                        <span class="payment-stat-value">152</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="payment-card">
-                <div class="payment-header">
-                    <span class="payment-icon">🤝</span>
-                    <span class="payment-title">ASSOCIADO</span>
-                </div>
-                <div class="payment-stats">
-                    <div class="payment-stat">
-                        <span class="payment-stat-label">Quantidade:</span>
-                        <span class="payment-stat-value">42</span>
-                    </div>
-                    <div class="payment-stat">
-                        <span class="payment-stat-label">% do Total:</span>
-                        <span class="payment-stat-value">0,6%</span>
-                    </div>
-                    <div class="payment-stat">
-                        <span class="payment-stat-label">Sites Únicos:</span>
-                        <span class="payment-stat-value">17</span>
+                        <span class="payment-stat-value">148</span>
                     </div>
                 </div>
             </div>
@@ -653,565 +618,368 @@
                         <tr>
                             <th>UF</th>
                             <th>Total OSs</th>
-                            <th colspan="4">🟦 CUSTO FIXO</th>
-                            <th colspan="4">🟪 SOB DEMANDA</th>
-                            <th colspan="2">⚠️ PEND. APROVAÇÃO</th>
-                        </tr>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th>Aberta</th>
-                            <th>% Ab.</th>
-                            <th>Exec.</th>
-                            <th>% Ex.</th>
-                            <th>Aberta</th>
-                            <th>% Ab.</th>
-                            <th>Exec.</th>
-                            <th>% Ex.</th>
-                            <th>Qtd</th>
-                            <th>%</th>
+                            <th colspan="2">🟦 Custo Fixo - Aberta</th>
+                            <th colspan="2">🟦 Custo Fixo - Exec.</th>
+                            <th colspan="2">🟪 Sob Demanda - Aberta</th>
+                            <th colspan="2">🟪 Sob Demanda - Exec.</th>
+                            <th colspan="2">⚠️ Pend. Aprovação</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><span class="badge badge-purple">PR</span></td>
-                            <td>1.987</td>
-                            <td>866</td>
-                            <td class="percent-medium">70,1%</td>
-                            <td>369</td>
-                            <td class="percent-high">29,9%</td>
-                            <td>382</td>
-                            <td class="percent-medium">53,7%</td>
-                            <td>329</td>
-                            <td class="percent-high">46,3%</td>
-                            <td>14</td>
-                            <td>0,7%</td>
-                        </tr>
-                        <tr>
-                            <td><span class="badge badge-purple">RS</span></td>
-                            <td>3.153</td>
-                            <td>1.001</td>
-                            <td class="percent-medium">64,3%</td>
-                            <td>556</td>
-                            <td class="percent-high">35,7%</td>
-                            <td>608</td>
-                            <td class="percent-medium">41,8%</td>
-                            <td>848</td>
-                            <td class="percent-high">58,2%</td>
-                            <td>136</td>
-                            <td>4,3%</td>
-                        </tr>
-                        <tr>
-                            <td><span class="badge badge-purple">SC</span></td>
-                            <td>1.385</td>
-                            <td>552</td>
-                            <td class="percent-medium">71,6%</td>
-                            <td>219</td>
-                            <td class="percent-high">28,4%</td>
-                            <td>219</td>
-                            <td class="percent-medium">39,1%</td>
-                            <td>341</td>
-                            <td class="percent-high">60,9%</td>
-                            <td>43</td>
-                            <td>3,1%</td>
-                        </tr>
-                        <tr class="table-total">
-                            <td><strong>TOTAL</strong></td>
-                            <td><strong>6.525</strong></td>
-                            <td><strong>2.419</strong></td>
-                            <td><strong>67,9%</strong></td>
-                            <td><strong>1.144</strong></td>
-                            <td><strong>32,1%</strong></td>
-                            <td><strong>1.209</strong></td>
-                            <td><strong>44,3%</strong></td>
-                            <td><strong>1.518</strong></td>
-                            <td><strong>55,7%</strong></td>
-                            <td><strong>193</strong></td>
-                            <td><strong>3,0%</strong></td>
-                        </tr>
+                    <tr>
+                        <td><span class="badge badge-purple">PR</span></td>
+                        <td>1.987</td>
+                        <td>885</td>
+                        <td class="percent-high">69,5%</td>
+                        <td>388</td>
+                        <td>30,5%</td>
+                        <td>372</td>
+                        <td>53,1%</td>
+                        <td>328</td>
+                        <td>46,9%</td>
+                        <td>14</td>
+                        <td>0,7%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-purple">RS</span></td>
+                        <td>3.153</td>
+                        <td>1.005</td>
+                        <td class="percent-medium">64,4%</td>
+                        <td>556</td>
+                        <td>35,6%</td>
+                        <td>608</td>
+                        <td>41,8%</td>
+                        <td>848</td>
+                        <td>58,2%</td>
+                        <td>136</td>
+                        <td>4,3%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-purple">SC</span></td>
+                        <td>1.385</td>
+                        <td>564</td>
+                        <td class="percent-high">70,2%</td>
+                        <td>239</td>
+                        <td>29,8%</td>
+                        <td>218</td>
+                        <td>40,4%</td>
+                        <td>321</td>
+                        <td>59,6%</td>
+                        <td>43</td>
+                        <td>3,1%</td>
+                    </tr>
+                    <tr class="table-total">
+                        <td><strong>TOTAL</strong></td>
+                        <td><strong>6.525</strong></td>
+                        <td><strong>2.454</strong></td>
+                        <td class="percent-medium"><strong>67,5%</strong></td>
+                        <td><strong>1.183</strong></td>
+                        <td><strong>32,5%</strong></td>
+                        <td><strong>1.198</strong></td>
+                        <td><strong>44,5%</strong></td>
+                        <td><strong>1.497</strong></td>
+                        <td><strong>55,5%</strong></td>
+                        <td><strong>193</strong></td>
+                        <td><strong>3,0%</strong></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- Duas Colunas: CM e Sites Únicos -->
-        <div class="two-columns">
-            <!-- Quantitativo por CM -->
-            <div>
-                <div class="section-title">📊 QUANTITATIVO DE OSs POR CM</div>
-                <div class="table-container">
-                    <div class="table-wrapper">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>CM</th>
-                                    <th>Total</th>
-                                    <th>🟦 Ab.</th>
-                                    <th>% Ab.</th>
-                                    <th>🟪 Ab.</th>
-                                    <th>% Ab.</th>
-                                    <th>⚠️</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><span class="badge badge-blue">BNU</span></td>
-                                    <td>434</td>
-                                    <td>169</td>
-                                    <td class="percent-medium">72,8%</td>
-                                    <td>82</td>
-                                    <td class="percent-medium">44,6%</td>
-                                    <td>7</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="badge badge-blue">CAN</span></td>
-                                    <td>269</td>
-                                    <td>78</td>
-                                    <td class="percent-low">88,6%</td>
-                                    <td>25</td>
-                                    <td class="percent-high">17,0%</td>
-                                    <td>32</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="badge badge-blue">CCO</span></td>
-                                    <td>120</td>
-                                    <td>30</td>
-                                    <td class="percent-medium">60,0%</td>
-                                    <td>11</td>
-                                    <td class="percent-high">15,7%</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="badge badge-blue">CSC</span></td>
-                                    <td>222</td>
-                                    <td>83</td>
-                                    <td class="percent-medium">76,1%</td>
-                                    <td>46</td>
-                                    <td class="percent-medium">49,5%</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="badge badge-blue">CSL</span></td>
-                                    <td>327</td>
-                                    <td>120</td>
-                                    <td class="percent-medium">77,4%</td>
-                                    <td>66</td>
-                                    <td class="percent-medium">40,2%</td>
-                                    <td>7</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="badge badge-blue">CTA</span></td>
-                                    <td>652</td>
-                                    <td>336</td>
-                                    <td class="percent-medium">75,2%</td>
-                                    <td>173</td>
-                                    <td class="percent-low">86,9%</td>
-                                    <td>6</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="badge badge-blue">CUA</span></td>
-                                    <td>140</td>
-                                    <td>29</td>
-                                    <td class="percent-medium">48,3%</td>
-                                    <td>40</td>
-                                    <td class="percent-medium">50,0%</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="badge badge-blue">FNS</span></td>
-                                    <td>286</td>
-                                    <td>61</td>
-                                    <td class="percent-medium">47,7%</td>
-                                    <td>29</td>
-                                    <td class="percent-high">23,8%</td>
-                                    <td>36</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="badge badge-blue">IAI</span></td>
-                                    <td>104</td>
-                                    <td>59</td>
-                                    <td class="percent-low">100%</td>
-                                    <td>45</td>
-                                    <td class="percent-low">100%</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="badge badge-blue">JVE</span></td>
-                                    <td>223</td>
-                                    <td>165</td>
-                                    <td class="percent-low">93,8%</td>
-                                    <td>0</td>
-                                    <td class="percent-high">0%</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="badge badge-blue">LDA</span></td>
-                                    <td>267</td>
-                                    <td>91</td>
-                                    <td class="percent-medium">50,8%</td>
-                                    <td>13</td>
-                                    <td class="percent-high">16,0%</td>
-                                    <td>3</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="badge badge-blue">LGS</span></td>
-                                    <td>78</td>
-                                    <td>39</td>
-                                    <td class="percent-medium">59,1%</td>
-                                    <td>12</td>
-                                    <td class="percent-low">100%</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="badge badge-blue">MGA</span></td>
-                                    <td>392</td>
-                                    <td>150</td>
-                                    <td class="percent-medium">65,5%</td>
-                                    <td>34</td>
-                                    <td class="percent-high">21,7%</td>
-                                    <td>3</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="badge badge-blue">NHO</span></td>
-                                    <td>313</td>
-                                    <td>53</td>
-                                    <td class="percent-medium">54,6%</td>
-                                    <td>133</td>
-                                    <td class="percent-medium">61,6%</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="badge badge-blue">OSR</span></td>
-                                    <td>167</td>
-                                    <td>8</td>
-                                    <td class="percent-high">30,8%</td>
-                                    <td>66</td>
-                                    <td class="percent-medium">62,9%</td>
-                                    <td>36</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="badge badge-blue">PAS</span></td>
-                                    <td>294</td>
-                                    <td>104</td>
-                                    <td class="percent-medium">61,5%</td>
-                                    <td>41</td>
-                                    <td class="percent-high">32,8%</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="badge badge-blue">PLT</span></td>
-                                    <td>201</td>
-                                    <td>36</td>
-                                    <td class="percent-high">33,3%</td>
-                                    <td>38</td>
-                                    <td class="percent-medium">40,9%</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="badge badge-blue">POA</span></td>
-                                    <td>590</td>
-                                    <td>236</td>
-                                    <td class="percent-medium">65,9%</td>
-                                    <td>66</td>
-                                    <td class="percent-high">29,5%</td>
-                                    <td>7</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="badge badge-blue">SAN</span></td>
-                                    <td>292</td>
-                                    <td>124</td>
-                                    <td class="percent-low">96,9%</td>
-                                    <td>81</td>
-                                    <td class="percent-medium">54,4%</td>
-                                    <td>15</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="badge badge-blue">SCR</span></td>
-                                    <td>279</td>
-                                    <td>83</td>
-                                    <td class="percent-medium">55,3%</td>
-                                    <td>0</td>
-                                    <td class="percent-high">0%</td>
-                                    <td>25</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="badge badge-blue">SJP</span></td>
-                                    <td>454</td>
-                                    <td>206</td>
-                                    <td class="percent-medium">76,0%</td>
-                                    <td>116</td>
-                                    <td class="percent-medium">64,1%</td>
-                                    <td>2</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="badge badge-blue">SMA</span></td>
-                                    <td>421</td>
-                                    <td>159</td>
-                                    <td class="percent-medium">57,2%</td>
-                                    <td>92</td>
-                                    <td class="percent-medium">71,3%</td>
-                                    <td>14</td>
-                                </tr>
-                                <tr class="table-total">
-                                    <td><strong>TOTAL</strong></td>
-                                    <td><strong>6.525</strong></td>
-                                    <td><strong>2.419</strong></td>
-                                    <td><strong>67,9%</strong></td>
-                                    <td><strong>1.209</strong></td>
-                                    <td><strong>44,3%</strong></td>
-                                    <td><strong>193</strong></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sites Únicos por UF -->
-            <div>
-                <div class="section-title">🏢 SITES ÚNICOS POR UF</div>
-                <div class="table-container">
-                    <div class="table-wrapper">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>UF</th>
-                                    <th>Sites</th>
-                                    <th>🟦 Ab.</th>
-                                    <th>% Ab.</th>
-                                    <th>🟪 Ab.</th>
-                                    <th>% Ab.</th>
-                                    <th>⚠️</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><span class="badge badge-purple">PR</span></td>
-                                    <td>208</td>
-                                    <td>111</td>
-                                    <td class="percent-medium">69,8%</td>
-                                    <td>33</td>
-                                    <td class="percent-medium">55,9%</td>
-                                    <td>7</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="badge badge-purple">RS</span></td>
-                                    <td>300</td>
-                                    <td>156</td>
-                                    <td class="percent-medium">66,4%</td>
-                                    <td>39</td>
-                                    <td class="percent-medium">46,4%</td>
-                                    <td>29</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="badge badge-purple">SC</span></td>
-                                    <td>164</td>
-                                    <td>98</td>
-                                    <td class="percent-medium">70,5%</td>
-                                    <td>14</td>
-                                    <td class="percent-medium">43,8%</td>
-                                    <td>8</td>
-                                </tr>
-                                <tr class="table-total">
-                                    <td><strong>TOTAL</strong></td>
-                                    <td><strong>672</strong></td>
-                                    <td><strong>365</strong></td>
-                                    <td><strong>68,5%</strong></td>
-                                    <td><strong>86</strong></td>
-                                    <td><strong>49,1%</strong></td>
-                                    <td><strong>44</strong></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Quantitativo por Coordenador -->
-        <div class="section-title">📊 QUANTITATIVO DE OSs POR COORDENADOR</div>
+        <!-- Quantitativo por CM -->
+        <div class="section-title">📊 QUANTITATIVO DE OSs POR CM</div>
         
         <div class="table-container">
             <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
-                            <th>Coordenador</th>
+                            <th>CM</th>
                             <th>Total OSs</th>
-                            <th colspan="4">🟦 CUSTO FIXO</th>
-                            <th colspan="4">🟪 SOB DEMANDA</th>
-                            <th colspan="2">⚠️ PEND. APROVAÇÃO</th>
-                        </tr>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th>Aberta</th>
-                            <th>% Ab.</th>
-                            <th>Exec.</th>
-                            <th>% Ex.</th>
-                            <th>Aberta</th>
-                            <th>% Ab.</th>
-                            <th>Exec.</th>
-                            <th>% Ex.</th>
-                            <th>Qtd</th>
-                            <th>%</th>
+                            <th colspan="2">🟦 Custo Fixo - Aberta</th>
+                            <th colspan="2">🟦 Custo Fixo - Exec.</th>
+                            <th colspan="2">🟪 Sob Demanda - Aberta</th>
+                            <th colspan="2">🟪 Sob Demanda - Exec.</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>ALEXANDRE MAZONI</td>
-                            <td>426</td>
-                            <td>90</td>
-                            <td class="percent-medium">47,9%</td>
-                            <td>98</td>
-                            <td class="percent-high">52,1%</td>
-                            <td>69</td>
-                            <td class="percent-high">34,2%</td>
-                            <td>133</td>
-                            <td class="percent-high">65,8%</td>
-                            <td>36</td>
-                            <td>8,5%</td>
-                        </tr>
-                        <tr>
-                            <td>ANDERSON PARENTE</td>
-                            <td>622</td>
-                            <td>195</td>
-                            <td class="percent-medium">50,5%</td>
-                            <td>191</td>
-                            <td class="percent-high">49,5%</td>
-                            <td>130</td>
-                            <td class="percent-medium">58,6%</td>
-                            <td>92</td>
-                            <td class="percent-high">41,4%</td>
-                            <td>14</td>
-                            <td>2,3%</td>
-                        </tr>
-                        <tr>
-                            <td>ANDREI ROSSI</td>
-                            <td>436</td>
-                            <td>86</td>
-                            <td class="percent-medium">75,4%</td>
-                            <td>28</td>
-                            <td class="percent-high">24,6%</td>
-                            <td>91</td>
-                            <td class="percent-high">36,1%</td>
-                            <td>161</td>
-                            <td class="percent-high">63,9%</td>
-                            <td>68</td>
-                            <td>15,6%</td>
-                        </tr>
-                        <tr>
-                            <td>CARLOS PREIS</td>
-                            <td>761</td>
-                            <td>393</td>
-                            <td class="percent-low">84,2%</td>
-                            <td>74</td>
-                            <td class="percent-high">15,8%</td>
-                            <td>127</td>
-                            <td class="percent-medium">46,0%</td>
-                            <td>149</td>
-                            <td class="percent-high">54,0%</td>
-                            <td>7</td>
-                            <td>0,9%</td>
-                        </tr>
-                        <tr>
-                            <td>ELENICE CONRAD</td>
-                            <td>652</td>
-                            <td>336</td>
-                            <td class="percent-medium">75,2%</td>
-                            <td>111</td>
-                            <td class="percent-high">24,8%</td>
-                            <td>173</td>
-                            <td class="percent-low">86,9%</td>
-                            <td>26</td>
-                            <td class="percent-high">13,1%</td>
-                            <td>6</td>
-                            <td>0,9%</td>
-                        </tr>
-                        <tr>
-                            <td>ESDRAS VIEIRA</td>
-                            <td>586</td>
-                            <td>228</td>
-                            <td class="percent-medium">76,8%</td>
-                            <td>69</td>
-                            <td class="percent-high">23,2%</td>
-                            <td>122</td>
-                            <td class="percent-medium">44,5%</td>
-                            <td>152</td>
-                            <td class="percent-high">55,5%</td>
-                            <td>15</td>
-                            <td>2,6%</td>
-                        </tr>
-                        <tr>
-                            <td>JULIANO RONI MORAS</td>
-                            <td>812</td>
-                            <td>302</td>
-                            <td class="percent-medium">66,5%</td>
-                            <td>152</td>
-                            <td class="percent-high">33,5%</td>
-                            <td>103</td>
-                            <td class="percent-high">31,0%</td>
-                            <td>229</td>
-                            <td class="percent-high">69,0%</td>
-                            <td>3</td>
-                            <td>0,4%</td>
-                        </tr>
-                        <tr>
-                            <td>LUCAS BARROS</td>
-                            <td>721</td>
-                            <td>297</td>
-                            <td class="percent-medium">66,0%</td>
-                            <td>153</td>
-                            <td class="percent-high">34,0%</td>
-                            <td>129</td>
-                            <td class="percent-medium">49,2%</td>
-                            <td>133</td>
-                            <td class="percent-high">50,8%</td>
-                            <td>5</td>
-                            <td>0,7%</td>
-                        </tr>
-                        <tr>
-                            <td>LUIS AUGUSTO</td>
-                            <td>869</td>
-                            <td>319</td>
-                            <td class="percent-medium">62,8%</td>
-                            <td>189</td>
-                            <td class="percent-high">37,2%</td>
-                            <td>66</td>
-                            <td class="percent-high">20,1%</td>
-                            <td>262</td>
-                            <td class="percent-high">79,9%</td>
-                            <td>32</td>
-                            <td>3,7%</td>
-                        </tr>
-                        <tr>
-                            <td>MAURICIO SPERAFICO</td>
-                            <td>640</td>
-                            <td>173</td>
-                            <td class="percent-medium">68,7%</td>
-                            <td>79</td>
-                            <td class="percent-high">31,3%</td>
-                            <td>199</td>
-                            <td class="percent-medium">52,4%</td>
-                            <td>181</td>
-                            <td class="percent-high">47,6%</td>
-                            <td>7</td>
-                            <td>1,1%</td>
-                        </tr>
-                        <tr class="table-total">
-                            <td><strong>TOTAL</strong></td>
-                            <td><strong>6.525</strong></td>
-                            <td><strong>2.419</strong></td>
-                            <td><strong>67,9%</strong></td>
-                            <td><strong>1.144</strong></td>
-                            <td><strong>32,1%</strong></td>
-                            <td><strong>1.209</strong></td>
-                            <td><strong>44,3%</strong></td>
-                            <td><strong>1.518</strong></td>
-                            <td><strong>55,7%</strong></td>
-                            <td><strong>193</strong></td>
-                            <td><strong>3,0%</strong></td>
-                        </tr>
+                    <tr>
+                        <td><span class="badge badge-blue">BNU</span></td>
+                        <td>434</td>
+                        <td>180</td>
+                        <td class="percent-high">74,1%</td>
+                        <td>63</td>
+                        <td>25,9%</td>
+                        <td>82</td>
+                        <td>44,6%</td>
+                        <td>102</td>
+                        <td>55,4%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-blue">CAN</span></td>
+                        <td>269</td>
+                        <td>80</td>
+                        <td class="percent-high">88,9%</td>
+                        <td>10</td>
+                        <td>11,1%</td>
+                        <td>25</td>
+                        <td>17,0%</td>
+                        <td>122</td>
+                        <td>83,0%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-blue">CCO</span></td>
+                        <td>120</td>
+                        <td>31</td>
+                        <td class="percent-medium">60,8%</td>
+                        <td>20</td>
+                        <td>39,2%</td>
+                        <td>10</td>
+                        <td>14,5%</td>
+                        <td>59</td>
+                        <td>85,5%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-blue">CSC</span></td>
+                        <td>222</td>
+                        <td>86</td>
+                        <td class="percent-medium">66,2%</td>
+                        <td>44</td>
+                        <td>33,8%</td>
+                        <td>45</td>
+                        <td>48,9%</td>
+                        <td>47</td>
+                        <td>51,1%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-blue">CSL</span></td>
+                        <td>327</td>
+                        <td>121</td>
+                        <td class="percent-high">77,6%</td>
+                        <td>35</td>
+                        <td>22,4%</td>
+                        <td>66</td>
+                        <td>40,2%</td>
+                        <td>98</td>
+                        <td>59,8%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-blue">CTA</span></td>
+                        <td>652</td>
+                        <td>345</td>
+                        <td class="percent-high">75,5%</td>
+                        <td>112</td>
+                        <td>24,5%</td>
+                        <td>164</td>
+                        <td class="percent-high">86,8%</td>
+                        <td>25</td>
+                        <td>13,2%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-blue">CUA</span></td>
+                        <td>140</td>
+                        <td>29</td>
+                        <td class="percent-low">48,3%</td>
+                        <td>31</td>
+                        <td>51,7%</td>
+                        <td>40</td>
+                        <td>50,0%</td>
+                        <td>40</td>
+                        <td>50,0%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-blue">FNS</span></td>
+                        <td>286</td>
+                        <td>61</td>
+                        <td class="percent-low">41,2%</td>
+                        <td>87</td>
+                        <td>58,8%</td>
+                        <td>29</td>
+                        <td>28,4%</td>
+                        <td>73</td>
+                        <td>71,6%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-blue">IAI</span></td>
+                        <td>104</td>
+                        <td>59</td>
+                        <td class="percent-high">100,0%</td>
+                        <td>0</td>
+                        <td>0,0%</td>
+                        <td>45</td>
+                        <td class="percent-high">100,0%</td>
+                        <td>0</td>
+                        <td>0,0%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-blue">JVE</span></td>
+                        <td>223</td>
+                        <td>165</td>
+                        <td class="percent-high">93,8%</td>
+                        <td>11</td>
+                        <td>6,3%</td>
+                        <td>0</td>
+                        <td>0,0%</td>
+                        <td>47</td>
+                        <td>100,0%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-blue">LDA</span></td>
+                        <td>267</td>
+                        <td>95</td>
+                        <td class="percent-medium">51,9%</td>
+                        <td>88</td>
+                        <td>48,1%</td>
+                        <td>13</td>
+                        <td>16,0%</td>
+                        <td>68</td>
+                        <td>84,0%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-blue">LGS</span></td>
+                        <td>78</td>
+                        <td>39</td>
+                        <td class="percent-medium">59,1%</td>
+                        <td>27</td>
+                        <td>40,9%</td>
+                        <td>12</td>
+                        <td class="percent-high">100,0%</td>
+                        <td>0</td>
+                        <td>0,0%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-blue">MGA</span></td>
+                        <td>392</td>
+                        <td>153</td>
+                        <td class="percent-medium">65,9%</td>
+                        <td>79</td>
+                        <td>34,1%</td>
+                        <td>34</td>
+                        <td>21,7%</td>
+                        <td>123</td>
+                        <td>78,3%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-blue">NHO</span></td>
+                        <td>313</td>
+                        <td>53</td>
+                        <td class="percent-medium">54,6%</td>
+                        <td>44</td>
+                        <td>45,4%</td>
+                        <td>133</td>
+                        <td class="percent-medium">61,6%</td>
+                        <td>83</td>
+                        <td>38,4%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-blue">OSR</span></td>
+                        <td>167</td>
+                        <td>8</td>
+                        <td class="percent-low">30,8%</td>
+                        <td>18</td>
+                        <td>69,2%</td>
+                        <td>66</td>
+                        <td class="percent-medium">62,9%</td>
+                        <td>39</td>
+                        <td>37,1%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-blue">PAS</span></td>
+                        <td>294</td>
+                        <td>104</td>
+                        <td class="percent-medium">61,5%</td>
+                        <td>65</td>
+                        <td>38,5%</td>
+                        <td>41</td>
+                        <td>32,8%</td>
+                        <td>84</td>
+                        <td>67,2%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-blue">PLT</span></td>
+                        <td>201</td>
+                        <td>36</td>
+                        <td class="percent-low">33,3%</td>
+                        <td>72</td>
+                        <td>66,7%</td>
+                        <td>38</td>
+                        <td>40,9%</td>
+                        <td>55</td>
+                        <td>59,1%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-blue">POA</span></td>
+                        <td>590</td>
+                        <td>237</td>
+                        <td class="percent-medium">66,0%</td>
+                        <td>122</td>
+                        <td>34,0%</td>
+                        <td>66</td>
+                        <td>29,5%</td>
+                        <td>158</td>
+                        <td>70,5%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-blue">SAN</span></td>
+                        <td>292</td>
+                        <td>124</td>
+                        <td class="percent-high">96,9%</td>
+                        <td>4</td>
+                        <td>3,1%</td>
+                        <td>81</td>
+                        <td class="percent-medium">54,4%</td>
+                        <td>68</td>
+                        <td>45,6%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-blue">SCR</span></td>
+                        <td>279</td>
+                        <td>83</td>
+                        <td class="percent-medium">55,3%</td>
+                        <td>67</td>
+                        <td>44,7%</td>
+                        <td>0</td>
+                        <td>0,0%</td>
+                        <td>104</td>
+                        <td>100,0%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-blue">SJP</span></td>
+                        <td>454</td>
+                        <td>206</td>
+                        <td class="percent-high">76,0%</td>
+                        <td>65</td>
+                        <td>24,0%</td>
+                        <td>116</td>
+                        <td class="percent-medium">64,1%</td>
+                        <td>65</td>
+                        <td>35,9%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-blue">SMA</span></td>
+                        <td>421</td>
+                        <td>159</td>
+                        <td class="percent-medium">57,2%</td>
+                        <td>119</td>
+                        <td>42,8%</td>
+                        <td>92</td>
+                        <td class="percent-high">71,3%</td>
+                        <td>37</td>
+                        <td>28,7%</td>
+                    </tr>
+                    <tr class="table-total">
+                        <td><strong>TOTAL</strong></td>
+                        <td><strong>6.525</strong></td>
+                        <td><strong>2.454</strong></td>
+                        <td class="percent-medium"><strong>67,5%</strong></td>
+                        <td><strong>1.183</strong></td>
+                        <td><strong>32,5%</strong></td>
+                        <td><strong>1.198</strong></td>
+                        <td><strong>44,5%</strong></td>
+                        <td><strong>1.497</strong></td>
+                        <td><strong>55,5%</strong></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -1219,8 +987,8 @@
 
         <!-- Footer -->
         <footer class="footer">
-            <p>📊 Painel de Gestão de Ordens de Serviço | Atualizado em 08/07/2026</p>
-            <p>Dados extraídos do sistema de gestão | Desenvolvido para acompanhamento operacional</p>
+            <p>📊 Painel de Gestão de Ordens de Serviço | Dados extraídos da Tabela6 (Base_Final)</p>
+            <p>Atualização: 08/07/2026 | Total de OSs processadas: 6.525</p>
         </footer>
     </div>
 </body>
