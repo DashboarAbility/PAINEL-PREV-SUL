@@ -6,10 +6,15 @@
     <title>Painel de Gestão de Ordens de Serviço</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #fff; min-height: 100vh; padding: 20px; }
+        body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background: #000000; color: #fff; min-height: 100vh; padding: 20px; }
         .container { max-width: 1600px; margin: 0 auto; }
         .header { text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 15px; }
         .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .header-content { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+        .header-title { flex: 1; text-align: center; }
+        .logo { height: 80px; width: auto; object-fit: contain; }
+        .logo-left { margin-right: 20px; }
+        .logo-right { margin-left: 20px; }
         .section { margin-bottom: 30px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 15px; }
         .section-title { font-size: 1.5em; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(255,255,255,0.2); }
         .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px; }
@@ -39,7 +44,12 @@
 <body>
     <div class="container">
         <div class="header">
+            <div class="header-content">
+                <img src="logo-left.png" alt="Logo Esquerda" class="logo logo-left">
+                <div class="header-title">
             <h1>📊 PAINEL DE GESTÃO DE ORDENS DE SERVIÇO</h1>
+                </div>
+                <img src="logo-right.png" alt="Logo Direita" class="logo logo-right">
         </div>
 
         <div class="section">
