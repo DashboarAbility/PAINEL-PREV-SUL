@@ -4,637 +4,110 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel de Gestão de Ordens de Serviço</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --primary-green: #00FF7F;
-            --primary-purple: #A855F7;
-            --primary-blue: #3B82F6;
-            --primary-yellow: #FBBF24;
-            --primary-red: #EF4444;
-            --primary-cyan: #06B6D4;
-            --primary-pink: #EC4899;
-            --bg-card: #111111;
-            --bg-card-hover: #1a1a1a;
-            --border-color: #333;
-            --text-primary: #ffffff;
-            --text-secondary: #a1a1aa;
-        }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #000000;
-            color: var(--text-primary);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1800px;
-            margin: 0 auto;
-        }
-        
-        /* Header */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-            margin-bottom: 30px;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .logo-left, .logo-right {
-            width: 120px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .logo-left img, .logo-right img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-        
-        .header-title {
-            text-align: center;
-            flex: 1;
-        }
-        
-        .header-title h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 5px;
-        }
-        
-        .header-title span {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-        
-        /* Section Titles */
-        .section-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 20px;
-            padding: 12px 20px;
-            background: linear-gradient(90deg, rgba(59,130,246,0.2) 0%, transparent 100%);
-            border-left: 4px solid var(--primary-blue);
-            border-radius: 0 8px 8px 0;
-        }
-        
-        /* KPI Cards */
-        .kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        
-        .kpi-card {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 24px;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-        }
-        
-        .kpi-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--primary-purple);
-            box-shadow: 0 10px 40px rgba(168, 85, 247, 0.15);
-        }
-        
-        .kpi-card.highlight {
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
-            border-color: var(--primary-purple);
-        }
-        
-        .kpi-label {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-        }
-        
-        .kpi-value {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
-        
-        .kpi-value.green { color: var(--primary-green); }
-        .kpi-value.purple { color: var(--primary-purple); }
-        .kpi-value.blue { color: var(--primary-blue); }
-        .kpi-value.yellow { color: var(--primary-yellow); }
-        .kpi-value.cyan { color: var(--primary-cyan); }
-        
-        .kpi-subtitle {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-        
-        /* Status Cards */
-        .status-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        
-        @media (max-width: 900px) {
-            .status-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .status-card {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 24px;
-            border: 1px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .status-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-        }
-        
-        .status-card.aberta::before { background: var(--primary-green); }
-        .status-card.executada::before { background: var(--primary-blue); }
-        .status-card.pendente::before { background: var(--primary-yellow); }
-        
-        .status-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-        
-        .status-icon {
-            font-size: 1.5rem;
-        }
-        
-        .status-title {
-            font-size: 1rem;
-            font-weight: 600;
-        }
-        
-        .status-card.aberta .status-title { color: var(--primary-green); }
-        .status-card.executada .status-title { color: var(--primary-blue); }
-        .status-card.pendente .status-title { color: var(--primary-yellow); }
-        
-        .status-value {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-        
-        .status-percent {
-            font-size: 1rem;
-            color: var(--text-secondary);
-        }
-        
-        /* Payment Cards */
-        .payment-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        
-        @media (max-width: 900px) {
-            .payment-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .payment-card {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 24px;
-            border: 1px solid var(--border-color);
-        }
-        
-        .payment-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-        
-        .payment-icon {
-            font-size: 1.5rem;
-        }
-        
-        .payment-title {
-            font-size: 1rem;
-            font-weight: 600;
-        }
-        
-        .payment-title.blue { color: var(--primary-blue); }
-        .payment-title.purple { color: var(--primary-purple); }
-        
-        .payment-stats {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        
-        .payment-stat {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .payment-stat-label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-        
-        .payment-stat-value {
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-        
-        /* UF Mini Cards */
-        .uf-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        
-        @media (max-width: 768px) {
-            .uf-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .uf-card {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 20px;
-            border: 1px solid var(--border-color);
-        }
-        
-        .uf-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-        
-        .uf-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-purple);
-        }
-        
-        .uf-badge {
-            background: rgba(168, 85, 247, 0.2);
-            color: var(--primary-purple);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-        
-        .uf-progress {
-            margin-bottom: 12px;
-        }
-        
-        .progress-bar {
-            height: 8px;
-            background: #222;
-            border-radius: 4px;
-            overflow: hidden;
-            display: flex;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            transition: width 0.5s ease;
-        }
-        
-        .progress-fill.abertas { background: var(--primary-purple); }
-        .progress-fill.executadas { background: var(--primary-green); }
-        
-        .uf-stats {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-        }
-        
-        .uf-stat {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .uf-stat-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-        }
-        
-        .uf-stat-dot.abertas { background: var(--primary-purple); }
-        .uf-stat-dot.executadas { background: var(--primary-green); }
-        
-        /* Tables */
-        .table-container {
-            background: var(--bg-card);
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-            margin-bottom: 40px;
-        }
-        
-        .table-wrapper {
-            overflow-x: auto;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        th {
-            background: #1a1a1a;
-            padding: 16px 12px;
-            text-align: left;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        th.center, td.center {
-            text-align: center;
-        }
-        
-        td {
-            padding: 14px 12px;
-            border-bottom: 1px solid #1a1a1a;
-            font-size: 0.9rem;
-        }
-        
-        tr:hover {
-            background: rgba(255, 255, 255, 0.02);
-        }
-        
-        tr:last-child td {
-            border-bottom: none;
-        }
-        
-        tr.table-total {
-            background: rgba(59, 130, 246, 0.1);
-            font-weight: 600;
-        }
-        
-        tr.table-total td {
-            border-top: 2px solid var(--primary-blue);
-        }
-        
-        .badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-        
-        .badge-blue {
-            background: rgba(59, 130, 246, 0.2);
-            color: var(--primary-blue);
-        }
-        
-        .badge-purple {
-            background: rgba(168, 85, 247, 0.2);
-            color: var(--primary-purple);
-        }
-        
-        .percent-high { color: var(--primary-green); }
-        .percent-medium { color: var(--primary-yellow); }
-        .percent-low { color: var(--primary-red); }
-        
-        /* Side by Side Tables */
-        .tables-row {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        
-        @media (max-width: 1200px) {
-            .tables-row {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 30px;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--border-color);
-            margin-top: 40px;
-        }
-        
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .animate {
-            animation: fadeIn 0.5s ease forwards;
-        }
-        
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #fff; min-height: 100vh; padding: 20px; }
+        .container { max-width: 1600px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 15px; }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .section { margin-bottom: 30px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 15px; }
+        .section-title { font-size: 1.5em; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(255,255,255,0.2); }
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px; }
+        .kpi-card { background: rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; text-align: center; }
+        .kpi-value { font-size: 2.5em; font-weight: bold; margin: 10px 0; }
+        .kpi-value.blue { color: #4dabf7; }
+        .kpi-value.purple { color: #da77f2; }
+        .kpi-value.green { color: #69db7c; }
+        .kpi-value.orange { color: #ffa94d; }
+        .kpi-label { font-size: 0.9em; color: rgba(255,255,255,0.7); }
+        .kpi-subtitle { font-size: 0.8em; color: rgba(255,255,255,0.5); margin-top: 5px; }
+        .table-container { overflow-x: auto; margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        th { background: rgba(255,255,255,0.1); font-weight: 600; }
+        .center { text-align: center; }
+        .table-total { background: rgba(255,255,255,0.15); font-weight: bold; }
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; }
+        .badge-blue { background: rgba(77,171,247,0.2); color: #4dabf7; }
+        .badge-purple { background: rgba(218,119,242,0.2); color: #da77f2; }
+        .badge-green { background: rgba(105,219,124,0.2); color: #69db7c; }
+        .badge-orange { background: rgba(255,169,77,0.2); color: #ffa94d; }
+        .footer { text-align: center; padding: 20px; margin-top: 30px; color: rgba(255,255,255,0.5); }
+        h3 { margin-bottom: 15px; color: rgba(255,255,255,0.9); }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <div class="logo-left">
-                <img src="logo-left.png" alt="Logo">
-            </div>
-            <div class="header-title">
-                <h1>📊 PAINEL DE GESTÃO DE ORDENS DE SERVIÇO</h1>
-                <span>Atualizado em: 09/07/2026</span>
-            </div>
-            <div class="logo-right">
-                <img src="logo-right.png" alt="Logo">
-            </div>
-        </header>
+        <div class="header">
+            <h1>📊 PAINEL DE GESTÃO DE ORDENS DE SERVIÇO</h1>
+        </div>
 
-        <!-- Indicadores Principais -->
-        <div class="section-title">📈 INDICADORES PRINCIPAIS</div>
-        
-        <div class="kpi-grid">
-            <div class="kpi-card highlight animate">
-                <div class="kpi-label">Total de OSs</div>
-                <div class="kpi-value cyan">6.525</div>
-                <div class="kpi-subtitle">Ordens de Serviço Registradas</div>
-            </div>
-            
-            <div class="kpi-card animate delay-1">
-                <div class="kpi-label">🟪 PR - Sob Demanda</div>
-                <div class="kpi-value purple">43%</div>
-                <div class="uf-progress">
-                    <div class="progress-bar">
-                        <div class="progress-fill abertas" style="width: 43%"></div>
-                        <div class="progress-fill executadas" style="width: 57%"></div>
-                    </div>
+        <div class="section">
+            <div class="section-title">📈 INDICADORES PRINCIPAIS</div>
+            <div class="cards-grid">
+                <div class="kpi-card">
+                    <div class="kpi-label">TOTAL DE OSs</div>
+                    <div class="kpi-value">6.525</div>
+                    <div class="kpi-subtitle">Ordens de Serviço Registradas</div>
                 </div>
-                <div class="uf-stats">
-                    <span class="uf-stat"><span class="uf-stat-dot abertas"></span> Abertas: 43%</span>
-                    <span class="uf-stat"><span class="uf-stat-dot executadas"></span> Executadas: 57%</span>
+                <div class="kpi-card">
+                    <div class="kpi-label">🟪 PR - Sob Demanda</div>
+                    <div class="kpi-value purple">43,4%</div>
+                    <div class="kpi-subtitle">Abertas: 43,4% | Executadas: 56,6%</div>
                 </div>
-            </div>
-            
-            <div class="kpi-card animate delay-2">
-                <div class="kpi-label">🟪 RS - Sob Demanda</div>
-                <div class="kpi-value purple">29%</div>
-                <div class="uf-progress">
-                    <div class="progress-bar">
-                        <div class="progress-fill abertas" style="width: 29%"></div>
-                        <div class="progress-fill executadas" style="width: 71%"></div>
-                    </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">🟪 RS - Sob Demanda</div>
+                    <div class="kpi-value purple">28,6%</div>
+                    <div class="kpi-subtitle">Abertas: 28,6% | Executadas: 71,4%</div>
                 </div>
-                <div class="uf-stats">
-                    <span class="uf-stat"><span class="uf-stat-dot abertas"></span> Abertas: 29%</span>
-                    <span class="uf-stat"><span class="uf-stat-dot executadas"></span> Executadas: 71%</span>
-                </div>
-            </div>
-            
-            <div class="kpi-card animate delay-3">
-                <div class="kpi-label">🟪 SC - Sob Demanda</div>
-                <div class="kpi-value purple">26%</div>
-                <div class="uf-progress">
-                    <div class="progress-bar">
-                        <div class="progress-fill abertas" style="width: 26%"></div>
-                        <div class="progress-fill executadas" style="width: 74%"></div>
-                    </div>
-                </div>
-                <div class="uf-stats">
-                    <span class="uf-stat"><span class="uf-stat-dot abertas"></span> Abertas: 26%</span>
-                    <span class="uf-stat"><span class="uf-stat-dot executadas"></span> Executadas: 74%</span>
+                <div class="kpi-card">
+                    <div class="kpi-label">🟪 SC - Sob Demanda</div>
+                    <div class="kpi-value purple">25,8%</div>
+                    <div class="kpi-subtitle">Abertas: 25,8% | Executadas: 74,2%</div>
                 </div>
             </div>
         </div>
 
-        <!-- Distribuição por Status -->
-        <div class="section-title">📋 DISTRIBUIÇÃO POR STATUS</div>
-        
-        <div class="status-grid">
-            <div class="status-card aberta animate">
-                <div class="status-header">
-                    <span class="status-icon">🟢</span>
-                    <span class="status-title">ABERTA</span>
+        <div class="section">
+            <div class="section-title">📋 DISTRIBUIÇÃO POR STATUS</div>
+            <div class="cards-grid">
+                <div class="kpi-card">
+                    <div class="kpi-label">🟢 ABERTA</div>
+                    <div class="kpi-value green">3.078</div>
+                    <div class="kpi-subtitle">47,2% do Total</div>
                 </div>
-                <div class="status-value">3.078</div>
-                <div class="status-percent">47,2% do Total</div>
-            </div>
-            
-            <div class="status-card executada animate delay-1">
-                <div class="status-header">
-                    <span class="status-icon">✅</span>
-                    <span class="status-title">EXECUTADA</span>
+                <div class="kpi-card">
+                    <div class="kpi-label">✅ EXECUTADA</div>
+                    <div class="kpi-value blue">3.221</div>
+                    <div class="kpi-subtitle">49,4% do Total</div>
                 </div>
-                <div class="status-value">3.221</div>
-                <div class="status-percent">49,4% do Total</div>
-            </div>
-            
-            <div class="status-card pendente animate delay-2">
-                <div class="status-header">
-                    <span class="status-icon">⚠️</span>
-                    <span class="status-title">PENDENTE APROVAÇÃO</span>
-                </div>
-                <div class="status-value">226</div>
-                <div class="status-percent">3,5% do Total</div>
-            </div>
-        </div>
-
-        <!-- Distribuição por Tipo de Pagamento -->
-        <div class="section-title">💰 DISTRIBUIÇÃO POR TIPO DE PAGAMENTO</div>
-        
-        <div class="payment-grid">
-            <div class="payment-card animate">
-                <div class="payment-header">
-                    <span class="payment-icon">💵</span>
-                    <span class="payment-title blue">CUSTO FIXO</span>
-                </div>
-                <div class="payment-stats">
-                    <div class="payment-stat">
-                        <span class="payment-stat-label">Quantidade:</span>
-                        <span class="payment-stat-value">3.694</span>
-                    </div>
-                    <div class="payment-stat">
-                        <span class="payment-stat-label">% do Total:</span>
-                        <span class="payment-stat-value">56,6%</span>
-                    </div>
-                    <div class="payment-stat">
-                        <span class="payment-stat-label">Sites Únicos:</span>
-                        <span class="payment-stat-value">524</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="payment-card animate delay-1">
-                <div class="payment-header">
-                    <span class="payment-icon">📊</span>
-                    <span class="payment-title purple">SOB DEMANDA</span>
-                </div>
-                <div class="payment-stats">
-                    <div class="payment-stat">
-                        <span class="payment-stat-label">Quantidade:</span>
-                        <span class="payment-stat-value">2.831</span>
-                    </div>
-                    <div class="payment-stat">
-                        <span class="payment-stat-label">% do Total:</span>
-                        <span class="payment-stat-value">43,4%</span>
-                    </div>
-                    <div class="payment-stat">
-                        <span class="payment-stat-label">Sites Únicos:</span>
-                        <span class="payment-stat-value">148</span>
-                    </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">⚠️ PENDENTE APROVAÇÃO</div>
+                    <div class="kpi-value orange">226</div>
+                    <div class="kpi-subtitle">3,5% do Total</div>
                 </div>
             </div>
         </div>
 
-        <!-- Quantitativo por UF -->
-        <div class="section-title">📊 QUANTITATIVO POR UF | 🟦 CUSTO FIXO | 🟪 SOB DEMANDA</div>
-        
-        <div class="table-container animate">
-            <div class="table-wrapper">
+        <div class="section">
+            <div class="section-title">💰 DISTRIBUIÇÃO POR TIPO DE PAGAMENTO</div>
+            <div class="cards-grid">
+                <div class="kpi-card">
+                    <div class="kpi-label">💵 CUSTO FIXO</div>
+                    <div class="kpi-value blue">3.694</div>
+                    <div class="kpi-subtitle">56,6% do Total | Sites Únicos: 524</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">📊 SOB DEMANDA</div>
+                    <div class="kpi-value purple">2.831</div>
+                    <div class="kpi-subtitle">43,4% do Total | Sites Únicos: 148</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">📊 QUANTITATIVO POR UF | 🟦 CUSTO FIXO | 🟪 SOB DEMANDA</div>
+            <div class="table-container">
                 <table>
                     <thead>
                         <tr>
@@ -647,87 +120,68 @@
                             <th class="center" colspan="2">⚠️ PEND. APROVAÇÃO</th>
                         </tr>
                         <tr>
-                            <th></th>
-                            <th></th>
-                            <th class="center">Qtd</th>
-                            <th class="center">%</th>
-                            <th class="center">Qtd</th>
-                            <th class="center">%</th>
-                            <th class="center">Qtd</th>
-                            <th class="center">%</th>
-                            <th class="center">Qtd</th>
-                            <th class="center">%</th>
-                            <th class="center">Qtd</th>
-                            <th class="center">%</th>
+                            <th></th><th></th>
+                            <th class="center">Qtd</th><th class="center">%</th>
+                            <th class="center">Qtd</th><th class="center">%</th>
+                            <th class="center">Qtd</th><th class="center">%</th>
+                            <th class="center">Qtd</th><th class="center">%</th>
+                            <th class="center">Qtd</th><th class="center">%</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><span class="badge badge-purple">PR</span></td>
+                            <td><span class="badge badge-blue">PR</span></td>
                             <td class="center">1.987</td>
-                            <td class="center">813</td>
-                            <td class="center percent-medium">65,7%</td>
-                            <td class="center">425</td>
-                            <td class="center">34,3%</td>
-                            <td class="center">294</td>
-                            <td class="center percent-medium">43,4%</td>
-                            <td class="center">384</td>
-                            <td class="center">56,6%</td>
-                            <td class="center">71</td>
-                            <td class="center">3,6%</td>
+                            <td class="center">813</td><td class="center">65,7%</td>
+                            <td class="center">425</td><td class="center">34,3%</td>
+                            <td class="center">294</td><td class="center">43,4%</td>
+                            <td class="center">384</td><td class="center">56,6%</td>
+                            <td class="center">71</td><td class="center">3,6%</td>
                         </tr>
                         <tr>
-                            <td><span class="badge badge-purple">RS</span></td>
+                            <td><span class="badge badge-blue">RS</span></td>
                             <td class="center">3.153</td>
-                            <td class="center">884</td>
-                            <td class="center percent-medium">56,1%</td>
-                            <td class="center">692</td>
-                            <td class="center">43,9%</td>
-                            <td class="center">435</td>
-                            <td class="center percent-low">28,6%</td>
-                            <td class="center">1.084</td>
-                            <td class="center">71,4%</td>
-                            <td class="center">58</td>
-                            <td class="center">1,8%</td>
+                            <td class="center">884</td><td class="center">56,1%</td>
+                            <td class="center">692</td><td class="center">43,9%</td>
+                            <td class="center">435</td><td class="center">28,6%</td>
+                            <td class="center">1.084</td><td class="center">71,4%</td>
+                            <td class="center">58</td><td class="center">1,8%</td>
                         </tr>
                         <tr>
-                            <td><span class="badge badge-purple">SC</span></td>
+                            <td><span class="badge badge-blue">SC</span></td>
                             <td class="center">1.385</td>
-                            <td class="center">518</td>
-                            <td class="center percent-medium">67,4%</td>
-                            <td class="center">250</td>
-                            <td class="center">32,6%</td>
-                            <td class="center">134</td>
-                            <td class="center percent-low">25,8%</td>
-                            <td class="center">386</td>
-                            <td class="center">74,2%</td>
-                            <td class="center">97</td>
-                            <td class="center percent-low">7,0%</td>
+                            <td class="center">518</td><td class="center">67,4%</td>
+                            <td class="center">250</td><td class="center">32,6%</td>
+                            <td class="center">134</td><td class="center">25,8%</td>
+                            <td class="center">386</td><td class="center">74,2%</td>
+                            <td class="center">97</td><td class="center">7,0%</td>
                         </tr>
                         <tr class="table-total">
                             <td><strong>TOTAL</strong></td>
                             <td class="center"><strong>6.525</strong></td>
-                            <td class="center"><strong>2.215</strong></td>
-                            <td class="center"><strong>61,8%</strong></td>
-                            <td class="center"><strong>1.367</strong></td>
-                            <td class="center"><strong>38,2%</strong></td>
-                            <td class="center"><strong>863</strong></td>
-                            <td class="center"><strong>31,8%</strong></td>
-                            <td class="center"><strong>1.854</strong></td>
-                            <td class="center"><strong>68,2%</strong></td>
-                            <td class="center"><strong>226</strong></td>
-                            <td class="center"><strong>3,5%</strong></td>
+                            <td class="center">2.215</td><td class="center">61,8%</td>
+                            <td class="center">1.367</td><td class="center">38,2%</td>
+                            <td class="center">863</td><td class="center">31,8%</td>
+                            <td class="center">1.854</td><td class="center">68,2%</td>
+                            <td class="center">226</td><td class="center">3,5%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-blue"></span></td>
+                            <td class="center"></td>
+                            <td class="center"></td><td class="center"></td>
+                            <td class="center"></td><td class="center"></td>
+                            <td class="center"></td><td class="center"></td>
+                            <td class="center"></td><td class="center"></td>
+                            <td class="center"></td><td class="center"></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- Quantitativo por CM -->
-        <div class="section-title">📊 QUANTITATIVO DE OSs POR CM (Centro de Manutenção)</div>
-        
-        <div class="table-container animate">
-            <div class="table-wrapper">
+        <div class="section">
+            <div class="section-title">📊 QUANTITATIVO DE OSs POR CM</div>
+            <div class="table-container">
                 <table>
                     <thead>
                         <tr>
@@ -740,353 +194,230 @@
                             <th class="center" colspan="2">⚠️ PEND. APROVAÇÃO</th>
                         </tr>
                         <tr>
-                            <th></th>
-                            <th></th>
-                            <th class="center">Qtd</th>
-                            <th class="center">%</th>
-                            <th class="center">Qtd</th>
-                            <th class="center">%</th>
-                            <th class="center">Qtd</th>
-                            <th class="center">%</th>
-                            <th class="center">Qtd</th>
-                            <th class="center">%</th>
-                            <th class="center">Qtd</th>
-                            <th class="center">%</th>
+                            <th></th><th></th>
+                            <th class="center">Qtd</th><th class="center">%</th>
+                            <th class="center">Qtd</th><th class="center">%</th>
+                            <th class="center">Qtd</th><th class="center">%</th>
+                            <th class="center">Qtd</th><th class="center">%</th>
+                            <th class="center">Qtd</th><th class="center">%</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><span class="badge badge-blue">BNU</span></td>
+                            <td><span class="badge badge-purple">BNU</span></td>
                             <td class="center">434</td>
-                            <td class="center">178</td>
-                            <td class="center">73,9%</td>
-                            <td class="center">63</td>
-                            <td class="center">26,1%</td>
-                            <td class="center">55</td>
-                            <td class="center">35,0%</td>
-                            <td class="center">102</td>
-                            <td class="center">65,0%</td>
-                            <td class="center">36</td>
-                            <td class="center">8,3%</td>
+                            <td class="center">178</td><td class="center">73,9%</td>
+                            <td class="center">63</td><td class="center">26,1%</td>
+                            <td class="center">55</td><td class="center">35,0%</td>
+                            <td class="center">102</td><td class="center">65,0%</td>
+                            <td class="center">36</td><td class="center">8,3%</td>
                         </tr>
                         <tr>
-                            <td><span class="badge badge-blue">CAN</span></td>
+                            <td><span class="badge badge-purple">CAN</span></td>
                             <td class="center">269</td>
-                            <td class="center">64</td>
-                            <td class="center">66,0%</td>
-                            <td class="center">33</td>
-                            <td class="center">34,0%</td>
-                            <td class="center">15</td>
-                            <td class="center">9,4%</td>
-                            <td class="center">145</td>
-                            <td class="center">90,6%</td>
-                            <td class="center">12</td>
-                            <td class="center">4,5%</td>
+                            <td class="center">64</td><td class="center">66,0%</td>
+                            <td class="center">33</td><td class="center">34,0%</td>
+                            <td class="center">15</td><td class="center">9,4%</td>
+                            <td class="center">145</td><td class="center">90,6%</td>
+                            <td class="center">12</td><td class="center">4,5%</td>
                         </tr>
                         <tr>
-                            <td><span class="badge badge-blue">CCO</span></td>
+                            <td><span class="badge badge-purple">CCO</span></td>
                             <td class="center">120</td>
-                            <td class="center">31</td>
-                            <td class="center">60,8%</td>
-                            <td class="center">20</td>
-                            <td class="center">39,2%</td>
-                            <td class="center">0</td>
-                            <td class="center">0,0%</td>
-                            <td class="center">69</td>
-                            <td class="center">100,0%</td>
-                            <td class="center">0</td>
-                            <td class="center">0,0%</td>
+                            <td class="center">31</td><td class="center">60,8%</td>
+                            <td class="center">20</td><td class="center">39,2%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
+                            <td class="center">69</td><td class="center">100,0%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
                         </tr>
                         <tr>
-                            <td><span class="badge badge-blue">CSC</span></td>
+                            <td><span class="badge badge-purple">CSC</span></td>
                             <td class="center">222</td>
-                            <td class="center">74</td>
-                            <td class="center">56,9%</td>
-                            <td class="center">56</td>
-                            <td class="center">43,1%</td>
-                            <td class="center">32</td>
-                            <td class="center">34,8%</td>
-                            <td class="center">60</td>
-                            <td class="center">65,2%</td>
-                            <td class="center">0</td>
-                            <td class="center">0,0%</td>
+                            <td class="center">74</td><td class="center">56,9%</td>
+                            <td class="center">56</td><td class="center">43,1%</td>
+                            <td class="center">32</td><td class="center">34,8%</td>
+                            <td class="center">60</td><td class="center">65,2%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
                         </tr>
                         <tr>
-                            <td><span class="badge badge-blue">CSL</span></td>
+                            <td><span class="badge badge-purple">CSL</span></td>
                             <td class="center">327</td>
-                            <td class="center">118</td>
-                            <td class="center">77,1%</td>
-                            <td class="center">35</td>
-                            <td class="center">22,9%</td>
-                            <td class="center">22</td>
-                            <td class="center">13,0%</td>
-                            <td class="center">147</td>
-                            <td class="center">87,0%</td>
-                            <td class="center">5</td>
-                            <td class="center">1,5%</td>
+                            <td class="center">118</td><td class="center">77,1%</td>
+                            <td class="center">35</td><td class="center">22,9%</td>
+                            <td class="center">22</td><td class="center">13,0%</td>
+                            <td class="center">147</td><td class="center">87,0%</td>
+                            <td class="center">5</td><td class="center">1,5%</td>
                         </tr>
                         <tr>
-                            <td><span class="badge badge-blue">CTA</span></td>
+                            <td><span class="badge badge-purple">CTA</span></td>
                             <td class="center">652</td>
-                            <td class="center">328</td>
-                            <td class="center">71,6%</td>
-                            <td class="center">130</td>
-                            <td class="center">28,4%</td>
-                            <td class="center">145</td>
-                            <td class="center">74,7%</td>
-                            <td class="center">49</td>
-                            <td class="center">25,3%</td>
-                            <td class="center">0</td>
-                            <td class="center">0,0%</td>
+                            <td class="center">328</td><td class="center">71,6%</td>
+                            <td class="center">130</td><td class="center">28,4%</td>
+                            <td class="center">145</td><td class="center">74,7%</td>
+                            <td class="center">49</td><td class="center">25,3%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
                         </tr>
                         <tr>
-                            <td><span class="badge badge-blue">CUA</span></td>
+                            <td><span class="badge badge-purple">CUA</span></td>
                             <td class="center">140</td>
-                            <td class="center">23</td>
-                            <td class="center">42,6%</td>
-                            <td class="center">31</td>
-                            <td class="center">57,4%</td>
-                            <td class="center">20</td>
-                            <td class="center">25,0%</td>
-                            <td class="center">60</td>
-                            <td class="center">75,0%</td>
-                            <td class="center">6</td>
-                            <td class="center">4,3%</td>
+                            <td class="center">23</td><td class="center">42,6%</td>
+                            <td class="center">31</td><td class="center">57,4%</td>
+                            <td class="center">20</td><td class="center">25,0%</td>
+                            <td class="center">60</td><td class="center">75,0%</td>
+                            <td class="center">6</td><td class="center">4,3%</td>
                         </tr>
                         <tr>
-                            <td><span class="badge badge-blue">FNS</span></td>
+                            <td><span class="badge badge-purple">FNS</span></td>
                             <td class="center">286</td>
-                            <td class="center">56</td>
-                            <td class="center">36,4%</td>
-                            <td class="center">98</td>
-                            <td class="center">63,6%</td>
-                            <td class="center">29</td>
-                            <td class="center">23,2%</td>
-                            <td class="center">96</td>
-                            <td class="center">76,8%</td>
-                            <td class="center">7</td>
-                            <td class="center">2,4%</td>
+                            <td class="center">56</td><td class="center">36,4%</td>
+                            <td class="center">98</td><td class="center">63,6%</td>
+                            <td class="center">29</td><td class="center">23,2%</td>
+                            <td class="center">96</td><td class="center">76,8%</td>
+                            <td class="center">7</td><td class="center">2,4%</td>
                         </tr>
                         <tr>
-                            <td><span class="badge badge-blue">IAI</span></td>
+                            <td><span class="badge badge-purple">IAI</span></td>
                             <td class="center">104</td>
-                            <td class="center">59</td>
-                            <td class="center">100,0%</td>
-                            <td class="center">0</td>
-                            <td class="center">0,0%</td>
-                            <td class="center">30</td>
-                            <td class="center">100,0%</td>
-                            <td class="center">0</td>
-                            <td class="center">0,0%</td>
-                            <td class="center">15</td>
-                            <td class="center">14,4%</td>
+                            <td class="center">59</td><td class="center">100,0%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
+                            <td class="center">30</td><td class="center">100,0%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
+                            <td class="center">15</td><td class="center">14,4%</td>
                         </tr>
                         <tr>
-                            <td><span class="badge badge-blue">JVE</span></td>
+                            <td><span class="badge badge-purple">JVE</span></td>
                             <td class="center">223</td>
-                            <td class="center">132</td>
-                            <td class="center">92,3%</td>
-                            <td class="center">11</td>
-                            <td class="center">7,7%</td>
-                            <td class="center">0</td>
-                            <td class="center">0,0%</td>
-                            <td class="center">47</td>
-                            <td class="center">100,0%</td>
-                            <td class="center">33</td>
-                            <td class="center">14,8%</td>
+                            <td class="center">132</td><td class="center">92,3%</td>
+                            <td class="center">11</td><td class="center">7,7%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
+                            <td class="center">47</td><td class="center">100,0%</td>
+                            <td class="center">33</td><td class="center">14,8%</td>
                         </tr>
                         <tr>
-                            <td><span class="badge badge-blue">LDA</span></td>
+                            <td><span class="badge badge-purple">LDA</span></td>
                             <td class="center">267</td>
-                            <td class="center">79</td>
-                            <td class="center">47,0%</td>
-                            <td class="center">89</td>
-                            <td class="center">53,0%</td>
-                            <td class="center">0</td>
-                            <td class="center">0,0%</td>
-                            <td class="center">68</td>
-                            <td class="center">100,0%</td>
-                            <td class="center">31</td>
-                            <td class="center">11,6%</td>
+                            <td class="center">79</td><td class="center">47,0%</td>
+                            <td class="center">89</td><td class="center">53,0%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
+                            <td class="center">68</td><td class="center">100,0%</td>
+                            <td class="center">31</td><td class="center">11,6%</td>
                         </tr>
                         <tr>
-                            <td><span class="badge badge-blue">LGS</span></td>
+                            <td><span class="badge badge-purple">LGS</span></td>
                             <td class="center">78</td>
-                            <td class="center">39</td>
-                            <td class="center">59,1%</td>
-                            <td class="center">27</td>
-                            <td class="center">40,9%</td>
-                            <td class="center">0</td>
-                            <td class="center">0,0%</td>
-                            <td class="center">12</td>
-                            <td class="center">100,0%</td>
-                            <td class="center">0</td>
-                            <td class="center">0,0%</td>
+                            <td class="center">39</td><td class="center">59,1%</td>
+                            <td class="center">27</td><td class="center">40,9%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
+                            <td class="center">12</td><td class="center">100,0%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
                         </tr>
                         <tr>
-                            <td><span class="badge badge-blue">MGA</span></td>
+                            <td><span class="badge badge-purple">MGA</span></td>
                             <td class="center">392</td>
-                            <td class="center">140</td>
-                            <td class="center">62,5%</td>
-                            <td class="center">84</td>
-                            <td class="center">37,5%</td>
-                            <td class="center">19</td>
-                            <td class="center">12,0%</td>
-                            <td class="center">139</td>
-                            <td class="center">88,0%</td>
-                            <td class="center">10</td>
-                            <td class="center">2,6%</td>
+                            <td class="center">140</td><td class="center">62,5%</td>
+                            <td class="center">84</td><td class="center">37,5%</td>
+                            <td class="center">19</td><td class="center">12,0%</td>
+                            <td class="center">139</td><td class="center">88,0%</td>
+                            <td class="center">10</td><td class="center">2,6%</td>
                         </tr>
                         <tr>
-                            <td><span class="badge badge-blue">NHO</span></td>
+                            <td><span class="badge badge-purple">NHO</span></td>
                             <td class="center">313</td>
-                            <td class="center">53</td>
-                            <td class="center">54,6%</td>
-                            <td class="center">44</td>
-                            <td class="center">45,4%</td>
-                            <td class="center">86</td>
-                            <td class="center">45,3%</td>
-                            <td class="center">104</td>
-                            <td class="center">54,7%</td>
-                            <td class="center">26</td>
-                            <td class="center">8,3%</td>
+                            <td class="center">53</td><td class="center">54,6%</td>
+                            <td class="center">44</td><td class="center">45,4%</td>
+                            <td class="center">86</td><td class="center">45,3%</td>
+                            <td class="center">104</td><td class="center">54,7%</td>
+                            <td class="center">26</td><td class="center">8,3%</td>
                         </tr>
                         <tr>
-                            <td><span class="badge badge-blue">OSR</span></td>
+                            <td><span class="badge badge-purple">OSR</span></td>
                             <td class="center">167</td>
-                            <td class="center">8</td>
-                            <td class="center">30,8%</td>
-                            <td class="center">18</td>
-                            <td class="center">69,2%</td>
-                            <td class="center">56</td>
-                            <td class="center">40,6%</td>
-                            <td class="center">82</td>
-                            <td class="center">59,4%</td>
-                            <td class="center">3</td>
-                            <td class="center">1,8%</td>
+                            <td class="center">8</td><td class="center">30,8%</td>
+                            <td class="center">18</td><td class="center">69,2%</td>
+                            <td class="center">56</td><td class="center">40,6%</td>
+                            <td class="center">82</td><td class="center">59,4%</td>
+                            <td class="center">3</td><td class="center">1,8%</td>
                         </tr>
                         <tr>
-                            <td><span class="badge badge-blue">PAS</span></td>
+                            <td><span class="badge badge-purple">PAS</span></td>
                             <td class="center">294</td>
-                            <td class="center">103</td>
-                            <td class="center">60,9%</td>
-                            <td class="center">66</td>
-                            <td class="center">39,1%</td>
-                            <td class="center">41</td>
-                            <td class="center">32,8%</td>
-                            <td class="center">84</td>
-                            <td class="center">67,2%</td>
-                            <td class="center">0</td>
-                            <td class="center">0,0%</td>
+                            <td class="center">103</td><td class="center">60,9%</td>
+                            <td class="center">66</td><td class="center">39,1%</td>
+                            <td class="center">41</td><td class="center">32,8%</td>
+                            <td class="center">84</td><td class="center">67,2%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
                         </tr>
                         <tr>
-                            <td><span class="badge badge-blue">PLT</span></td>
+                            <td><span class="badge badge-purple">PLT</span></td>
                             <td class="center">201</td>
-                            <td class="center">18</td>
-                            <td class="center">17,0%</td>
-                            <td class="center">88</td>
-                            <td class="center">83,0%</td>
-                            <td class="center">37</td>
-                            <td class="center">40,2%</td>
-                            <td class="center">55</td>
-                            <td class="center">59,8%</td>
-                            <td class="center">3</td>
-                            <td class="center">1,5%</td>
+                            <td class="center">18</td><td class="center">17,0%</td>
+                            <td class="center">88</td><td class="center">83,0%</td>
+                            <td class="center">37</td><td class="center">40,2%</td>
+                            <td class="center">55</td><td class="center">59,8%</td>
+                            <td class="center">3</td><td class="center">1,5%</td>
                         </tr>
                         <tr>
-                            <td><span class="badge badge-blue">POA</span></td>
+                            <td><span class="badge badge-purple">POA</span></td>
                             <td class="center">590</td>
-                            <td class="center">224</td>
-                            <td class="center">61,2%</td>
-                            <td class="center">142</td>
-                            <td class="center">38,8%</td>
-                            <td class="center">46</td>
-                            <td class="center">20,8%</td>
-                            <td class="center">175</td>
-                            <td class="center">79,2%</td>
-                            <td class="center">3</td>
-                            <td class="center">0,5%</td>
+                            <td class="center">224</td><td class="center">61,2%</td>
+                            <td class="center">142</td><td class="center">38,8%</td>
+                            <td class="center">46</td><td class="center">20,8%</td>
+                            <td class="center">175</td><td class="center">79,2%</td>
+                            <td class="center">3</td><td class="center">0,5%</td>
                         </tr>
                         <tr>
-                            <td><span class="badge badge-blue">SAN</span></td>
+                            <td><span class="badge badge-purple">SAN</span></td>
                             <td class="center">292</td>
-                            <td class="center">108</td>
-                            <td class="center">82,4%</td>
-                            <td class="center">23</td>
-                            <td class="center">17,6%</td>
-                            <td class="center">64</td>
-                            <td class="center">39,8%</td>
-                            <td class="center">97</td>
-                            <td class="center">60,2%</td>
-                            <td class="center">0</td>
-                            <td class="center">0,0%</td>
+                            <td class="center">108</td><td class="center">82,4%</td>
+                            <td class="center">23</td><td class="center">17,6%</td>
+                            <td class="center">64</td><td class="center">39,8%</td>
+                            <td class="center">97</td><td class="center">60,2%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
                         </tr>
                         <tr>
-                            <td><span class="badge badge-blue">SCR</span></td>
+                            <td><span class="badge badge-purple">SCR</span></td>
                             <td class="center">279</td>
-                            <td class="center">59</td>
-                            <td class="center">39,3%</td>
-                            <td class="center">91</td>
-                            <td class="center">60,7%</td>
-                            <td class="center">0</td>
-                            <td class="center">0,0%</td>
-                            <td class="center">126</td>
-                            <td class="center">100,0%</td>
-                            <td class="center">3</td>
-                            <td class="center">1,1%</td>
+                            <td class="center">59</td><td class="center">39,3%</td>
+                            <td class="center">91</td><td class="center">60,7%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
+                            <td class="center">126</td><td class="center">100,0%</td>
+                            <td class="center">3</td><td class="center">1,1%</td>
                         </tr>
                         <tr>
-                            <td><span class="badge badge-blue">SJP</span></td>
+                            <td><span class="badge badge-purple">SJP</span></td>
                             <td class="center">454</td>
-                            <td class="center">192</td>
-                            <td class="center">74,4%</td>
-                            <td class="center">66</td>
-                            <td class="center">25,6%</td>
-                            <td class="center">98</td>
-                            <td class="center">59,0%</td>
-                            <td class="center">68</td>
-                            <td class="center">41,0%</td>
-                            <td class="center">30</td>
-                            <td class="center">6,6%</td>
+                            <td class="center">192</td><td class="center">74,4%</td>
+                            <td class="center">66</td><td class="center">25,6%</td>
+                            <td class="center">98</td><td class="center">59,0%</td>
+                            <td class="center">68</td><td class="center">41,0%</td>
+                            <td class="center">30</td><td class="center">6,6%</td>
                         </tr>
                         <tr>
-                            <td><span class="badge badge-blue">SMA</span></td>
+                            <td><span class="badge badge-purple">SMA</span></td>
                             <td class="center">421</td>
-                            <td class="center">129</td>
-                            <td class="center">45,9%</td>
-                            <td class="center">152</td>
-                            <td class="center">54,1%</td>
-                            <td class="center">68</td>
-                            <td class="center">49,6%</td>
-                            <td class="center">69</td>
-                            <td class="center">50,4%</td>
-                            <td class="center">3</td>
-                            <td class="center">0,7%</td>
+                            <td class="center">129</td><td class="center">45,9%</td>
+                            <td class="center">152</td><td class="center">54,1%</td>
+                            <td class="center">68</td><td class="center">49,6%</td>
+                            <td class="center">69</td><td class="center">50,4%</td>
+                            <td class="center">3</td><td class="center">0,7%</td>
                         </tr>
                         <tr class="table-total">
                             <td><strong>TOTAL</strong></td>
                             <td class="center"><strong>6.525</strong></td>
-                            <td class="center"><strong>2.215</strong></td>
-                            <td class="center"><strong>61,8%</strong></td>
-                            <td class="center"><strong>1.367</strong></td>
-                            <td class="center"><strong>38,2%</strong></td>
-                            <td class="center"><strong>863</strong></td>
-                            <td class="center"><strong>31,8%</strong></td>
-                            <td class="center"><strong>1.854</strong></td>
-                            <td class="center"><strong>68,2%</strong></td>
-                            <td class="center"><strong>226</strong></td>
-                            <td class="center"><strong>3,5%</strong></td>
+                            <td class="center">2.215</td><td class="center">61,8%</td>
+                            <td class="center">1.367</td><td class="center">38,2%</td>
+                            <td class="center">863</td><td class="center">31,8%</td>
+                            <td class="center">1.854</td><td class="center">68,2%</td>
+                            <td class="center">226</td><td class="center">3,5%</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- Quantitativo por Coordenador -->
-        <div class="section-title">📊 QUANTITATIVO DE OSs POR COORDENADOR</div>
-        
-        <div class="table-container animate">
-            <div class="table-wrapper">
+        <div class="section">
+            <div class="section-title">📊 QUANTITATIVO DE OSs POR COORDENADOR</div>
+            <div class="table-container">
                 <table>
                     <thead>
                         <tr>
@@ -1099,272 +430,533 @@
                             <th class="center" colspan="2">⚠️ PEND. APROVAÇÃO</th>
                         </tr>
                         <tr>
-                            <th></th>
-                            <th></th>
-                            <th class="center">Qtd</th>
-                            <th class="center">%</th>
-                            <th class="center">Qtd</th>
-                            <th class="center">%</th>
-                            <th class="center">Qtd</th>
-                            <th class="center">%</th>
-                            <th class="center">Qtd</th>
-                            <th class="center">%</th>
-                            <th class="center">Qtd</th>
-                            <th class="center">%</th>
+                            <th></th><th></th>
+                            <th class="center">Qtd</th><th class="center">%</th>
+                            <th class="center">Qtd</th><th class="center">%</th>
+                            <th class="center">Qtd</th><th class="center">%</th>
+                            <th class="center">Qtd</th><th class="center">%</th>
+                            <th class="center">Qtd</th><th class="center">%</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td><span class="badge badge-purple">ALEXANDRE MAZONI</span></td>
                             <td class="center">426</td>
-                            <td class="center">79</td>
-                            <td class="center">38,0%</td>
-                            <td class="center">129</td>
-                            <td class="center">62,0%</td>
-                            <td class="center">49</td>
-                            <td class="center">23,9%</td>
-                            <td class="center">156</td>
-                            <td class="center">76,1%</td>
-                            <td class="center">13</td>
-                            <td class="center">3,1%</td>
+                            <td class="center">79</td><td class="center">38,0%</td>
+                            <td class="center">129</td><td class="center">62,0%</td>
+                            <td class="center">49</td><td class="center">23,9%</td>
+                            <td class="center">156</td><td class="center">76,1%</td>
+                            <td class="center">13</td><td class="center">3,1%</td>
                         </tr>
                         <tr>
                             <td><span class="badge badge-purple">ANDERSON PARENTE</span></td>
                             <td class="center">622</td>
-                            <td class="center">147</td>
-                            <td class="center">38,0%</td>
-                            <td class="center">240</td>
-                            <td class="center">62,0%</td>
-                            <td class="center">105</td>
-                            <td class="center">45,9%</td>
-                            <td class="center">124</td>
-                            <td class="center">54,1%</td>
-                            <td class="center">6</td>
-                            <td class="center">1,0%</td>
+                            <td class="center">147</td><td class="center">38,0%</td>
+                            <td class="center">240</td><td class="center">62,0%</td>
+                            <td class="center">105</td><td class="center">45,9%</td>
+                            <td class="center">124</td><td class="center">54,1%</td>
+                            <td class="center">6</td><td class="center">1,0%</td>
                         </tr>
                         <tr>
                             <td><span class="badge badge-purple">ANDREI ROSSI</span></td>
                             <td class="center">436</td>
-                            <td class="center">72</td>
-                            <td class="center">58,5%</td>
-                            <td class="center">51</td>
-                            <td class="center">41,5%</td>
-                            <td class="center">71</td>
-                            <td class="center">23,8%</td>
-                            <td class="center">227</td>
-                            <td class="center">76,2%</td>
-                            <td class="center">15</td>
-                            <td class="center">3,4%</td>
+                            <td class="center">72</td><td class="center">58,5%</td>
+                            <td class="center">51</td><td class="center">41,5%</td>
+                            <td class="center">71</td><td class="center">23,8%</td>
+                            <td class="center">227</td><td class="center">76,2%</td>
+                            <td class="center">15</td><td class="center">3,4%</td>
                         </tr>
                         <tr>
                             <td><span class="badge badge-purple">CARLOS PREIS</span></td>
                             <td class="center">761</td>
-                            <td class="center">369</td>
-                            <td class="center">83,3%</td>
-                            <td class="center">74</td>
-                            <td class="center">16,7%</td>
-                            <td class="center">85</td>
-                            <td class="center">36,3%</td>
-                            <td class="center">149</td>
-                            <td class="center">63,7%</td>
-                            <td class="center">84</td>
-                            <td class="center percent-low">11,0%</td>
+                            <td class="center">369</td><td class="center">83,3%</td>
+                            <td class="center">74</td><td class="center">16,7%</td>
+                            <td class="center">85</td><td class="center">36,3%</td>
+                            <td class="center">149</td><td class="center">63,7%</td>
+                            <td class="center">84</td><td class="center">11,0%</td>
                         </tr>
                         <tr>
                             <td><span class="badge badge-purple">ELENICE CONRAD</span></td>
                             <td class="center">652</td>
-                            <td class="center">328</td>
-                            <td class="center">71,6%</td>
-                            <td class="center">130</td>
-                            <td class="center">28,4%</td>
-                            <td class="center">145</td>
-                            <td class="center">74,7%</td>
-                            <td class="center">49</td>
-                            <td class="center">25,3%</td>
-                            <td class="center">0</td>
-                            <td class="center">0,0%</td>
+                            <td class="center">328</td><td class="center">71,6%</td>
+                            <td class="center">130</td><td class="center">28,4%</td>
+                            <td class="center">145</td><td class="center">74,7%</td>
+                            <td class="center">49</td><td class="center">25,3%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
                         </tr>
                         <tr>
                             <td><span class="badge badge-purple">ESDRAS VIEIRA</span></td>
                             <td class="center">586</td>
-                            <td class="center">211</td>
-                            <td class="center">70,3%</td>
-                            <td class="center">89</td>
-                            <td class="center">29,7%</td>
-                            <td class="center">105</td>
-                            <td class="center">36,7%</td>
-                            <td class="center">181</td>
-                            <td class="center">63,3%</td>
-                            <td class="center">0</td>
-                            <td class="center">0,0%</td>
+                            <td class="center">211</td><td class="center">70,3%</td>
+                            <td class="center">89</td><td class="center">29,7%</td>
+                            <td class="center">105</td><td class="center">36,7%</td>
+                            <td class="center">181</td><td class="center">63,3%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
                         </tr>
                         <tr>
                             <td><span class="badge badge-purple">JULIANO RONI MORAS</span></td>
                             <td class="center">812</td>
-                            <td class="center">284</td>
-                            <td class="center">60,3%</td>
-                            <td class="center">187</td>
-                            <td class="center">39,7%</td>
-                            <td class="center">51</td>
-                            <td class="center">15,4%</td>
-                            <td class="center">280</td>
-                            <td class="center">84,6%</td>
-                            <td class="center">10</td>
-                            <td class="center">1,2%</td>
+                            <td class="center">284</td><td class="center">60,3%</td>
+                            <td class="center">187</td><td class="center">39,7%</td>
+                            <td class="center">51</td><td class="center">15,4%</td>
+                            <td class="center">280</td><td class="center">84,6%</td>
+                            <td class="center">10</td><td class="center">1,2%</td>
                         </tr>
                         <tr>
                             <td><span class="badge badge-purple">LUCAS BARROS</span></td>
                             <td class="center">721</td>
-                            <td class="center">271</td>
-                            <td class="center">63,6%</td>
-                            <td class="center">155</td>
-                            <td class="center">36,4%</td>
-                            <td class="center">98</td>
-                            <td class="center">41,9%</td>
-                            <td class="center">136</td>
-                            <td class="center">58,1%</td>
-                            <td class="center">61</td>
-                            <td class="center percent-low">8,5%</td>
+                            <td class="center">271</td><td class="center">63,6%</td>
+                            <td class="center">155</td><td class="center">36,4%</td>
+                            <td class="center">98</td><td class="center">41,9%</td>
+                            <td class="center">136</td><td class="center">58,1%</td>
+                            <td class="center">61</td><td class="center">8,5%</td>
                         </tr>
                         <tr>
                             <td><span class="badge badge-purple">LUIS AUGUSTO</span></td>
                             <td class="center">869</td>
-                            <td class="center">283</td>
-                            <td class="center">54,8%</td>
-                            <td class="center">233</td>
-                            <td class="center">45,2%</td>
-                            <td class="center">46</td>
-                            <td class="center">13,3%</td>
-                            <td class="center">301</td>
-                            <td class="center">86,7%</td>
-                            <td class="center">6</td>
-                            <td class="center">0,7%</td>
+                            <td class="center">283</td><td class="center">54,8%</td>
+                            <td class="center">233</td><td class="center">45,2%</td>
+                            <td class="center">46</td><td class="center">13,3%</td>
+                            <td class="center">301</td><td class="center">86,7%</td>
+                            <td class="center">6</td><td class="center">0,7%</td>
                         </tr>
                         <tr>
                             <td><span class="badge badge-purple">MAURICIO SPERAFICO</span></td>
                             <td class="center">640</td>
-                            <td class="center">171</td>
-                            <td class="center">68,4%</td>
-                            <td class="center">79</td>
-                            <td class="center">31,6%</td>
-                            <td class="center">108</td>
-                            <td class="center">30,1%</td>
-                            <td class="center">251</td>
-                            <td class="center">69,9%</td>
-                            <td class="center">31</td>
-                            <td class="center">4,8%</td>
+                            <td class="center">171</td><td class="center">68,4%</td>
+                            <td class="center">79</td><td class="center">31,6%</td>
+                            <td class="center">108</td><td class="center">30,1%</td>
+                            <td class="center">251</td><td class="center">69,9%</td>
+                            <td class="center">31</td><td class="center">4,8%</td>
                         </tr>
                         <tr class="table-total">
                             <td><strong>TOTAL</strong></td>
                             <td class="center"><strong>6.525</strong></td>
-                            <td class="center"><strong>2.215</strong></td>
-                            <td class="center"><strong>61,8%</strong></td>
-                            <td class="center"><strong>1.367</strong></td>
-                            <td class="center"><strong>38,2%</strong></td>
-                            <td class="center"><strong>863</strong></td>
-                            <td class="center"><strong>31,8%</strong></td>
-                            <td class="center"><strong>1.854</strong></td>
-                            <td class="center"><strong>68,2%</strong></td>
-                            <td class="center"><strong>226</strong></td>
-                            <td class="center"><strong>3,5%</strong></td>
+                            <td class="center">2.215</td><td class="center">61,8%</td>
+                            <td class="center">1.367</td><td class="center">38,2%</td>
+                            <td class="center">863</td><td class="center">31,8%</td>
+                            <td class="center">1.854</td><td class="center">68,2%</td>
+                            <td class="center">226</td><td class="center">3,5%</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-
-        <!-- Site Único / Centrais Únicas -->
         <div class="section">
-            <div class="section-title">🏢 SITE ÚNICO / CENTRAIS ÚNICAS</div>
-            <div class="cards-grid">
-                <div class="kpi-card">
-                    <div class="kpi-label">Total de Centrais Únicas</div>
-                    <div class="kpi-value">672</div>
-                    <div class="kpi-subtitle">Cada central possui apenas um tipo de pagamento</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-label">Custo Fixo</div>
-                    <div class="kpi-value blue">524</div>
-                    <div class="kpi-subtitle">Centrais em custo fixo</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-label">Sob Demanda</div>
-                    <div class="kpi-value purple">148</div>
-                    <div class="kpi-subtitle">Centrais sob demanda</div>
-                </div>
-            </div>
-
+            <div class="section-title">🏢 SITES ÚNICOS POR UF</div>
             <div class="table-container">
-                <h3>🗺️ Centrais Únicas por UF e Tipo de Pagamento</h3>
                 <table>
-                    <thead><tr><th>UF</th><th class="center">Custo Fixo</th><th class="center">Sob Demanda</th><th class="center">Total</th></tr></thead>
+                    <thead>
+                        <tr>
+                            <th>UF</th>
+                            <th class="center">Sites Únicos</th>
+                            <th class="center" colspan="2">🟦 CUSTO FIXO - Ab.</th>
+                            <th class="center" colspan="2">🟦 CUSTO FIXO - Exec.</th>
+                            <th class="center" colspan="2">🟪 SOB DEMANDA - Ab.</th>
+                            <th class="center" colspan="2">🟪 SOB DEMANDA - Exec.</th>
+                            <th class="center" colspan="2">⚠️ PEND. APROVAÇÃO</th>
+                        </tr>
+                        <tr>
+                            <th></th><th></th>
+                            <th class="center">Qtd</th><th class="center">%</th>
+                            <th class="center">Qtd</th><th class="center">%</th>
+                            <th class="center">Qtd</th><th class="center">%</th>
+                            <th class="center">Qtd</th><th class="center">%</th>
+                            <th class="center">Sites</th><th class="center">%</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                        <tr><td>PR</td><td class="center">162</td><td class="center">46</td><td class="center"><strong>208</strong></td></tr>
-                        <tr><td>RS</td><td class="center">227</td><td class="center">73</td><td class="center"><strong>300</strong></td></tr>
-                        <tr><td>SC</td><td class="center">135</td><td class="center">29</td><td class="center"><strong>164</strong></td></tr>
-                        <tr class="table-total"><td>TOTAL</td><td class="center">524</td><td class="center">148</td><td class="center"><strong>672</strong></td></tr>
+                        <tr>
+                            <td><span class="badge badge-blue">RS</span></td>
+                            <td class="center">300</td>
+                            <td class="center">145</td><td class="center">63,9%</td>
+                            <td class="center">82</td><td class="center">36,1%</td>
+                            <td class="center">32</td><td class="center">43,8%</td>
+                            <td class="center">41</td><td class="center">56,2%</td>
+                            <td class="center">16</td><td class="center">5,3%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-blue">SC</span></td>
+                            <td class="center">164</td>
+                            <td class="center">99</td><td class="center">73,3%</td>
+                            <td class="center">36</td><td class="center">26,7%</td>
+                            <td class="center">6</td><td class="center">20,7%</td>
+                            <td class="center">23</td><td class="center">79,3%</td>
+                            <td class="center">10</td><td class="center">6,1%</td>
+                        </tr>
+                        <tr class="table-total">
+                            <td><strong>TOTAL</strong></td>
+                            <td class="center"><strong>672</strong></td>
+                            <td class="center">356</td><td class="center">67,9%</td>
+                            <td class="center">168</td><td class="center">32,1%</td>
+                            <td class="center">64</td><td class="center">43,2%</td>
+                            <td class="center">84</td><td class="center">56,8%</td>
+                            <td class="center">40</td><td class="center">6,0%</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
-
-            <div class="table-container">
-                <h3>👤 Centrais Únicas por Coordenador</h3>
-                <table>
-                    <thead><tr><th>Coordenador</th><th class="center">Centrais</th></tr></thead>
-                    <tbody>
-                        <tr><td>ALEXANDRE MAZONI</td><td class="center"><strong>55</strong></td></tr>
-                        <tr><td>ANDERSON PARENTE</td><td class="center"><strong>71</strong></td></tr>
-                        <tr><td>ANDREI ROSSI</td><td class="center"><strong>48</strong></td></tr>
-                        <tr><td>CARLOS PREIS</td><td class="center"><strong>76</strong></td></tr>
-                        <tr><td>ELENICE CONRAD</td><td class="center"><strong>60</strong></td></tr>
-                        <tr><td>ESDRAS VIEIRA</td><td class="center"><strong>44</strong></td></tr>
-                        <tr><td>JULIANO RONI MORAS</td><td class="center"><strong>104</strong></td></tr>
-                        <tr><td>LUCAS BARROS</td><td class="center"><strong>77</strong></td></tr>
-                        <tr><td>LUIS AUGUSTO</td><td class="center"><strong>77</strong></td></tr>
-                        <tr><td>MAURICIO SPERAFICO</td><td class="center"><strong>60</strong></td></tr>
-                        <tr class="table-total"><td>TOTAL</td><td class="center"><strong>672</strong></td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="table-container">
-                <h3>🏢 Centrais Únicas por CM</h3>
-                <table>
-                    <thead><tr><th>CM</th><th class="center">Centrais</th><th class="center">PR</th><th class="center">RS</th><th class="center">SC</th></tr></thead>
-                    <tbody>
-                        <tr><td>BNU</td><td class="center"><strong>35</strong></td><td class="center">0</td><td class="center">0</td><td class="center">35</td></tr>
-                        <tr><td>CAN</td><td class="center"><strong>34</strong></td><td class="center">0</td><td class="center">34</td><td class="center">0</td></tr>
-                        <tr><td>CCO</td><td class="center"><strong>20</strong></td><td class="center">0</td><td class="center">0</td><td class="center">20</td></tr>
-                        <tr><td>CSC</td><td class="center"><strong>34</strong></td><td class="center">34</td><td class="center">0</td><td class="center">0</td></tr>
-                        <tr><td>CSL</td><td class="center"><strong>36</strong></td><td class="center">0</td><td class="center">36</td><td class="center">0</td></tr>
-                        <tr><td>CTA</td><td class="center"><strong>60</strong></td><td class="center">60</td><td class="center">0</td><td class="center">0</td></tr>
-                        <tr><td>CUA</td><td class="center"><strong>17</strong></td><td class="center">0</td><td class="center">0</td><td class="center">17</td></tr>
-                        <tr><td>FNS</td><td class="center"><strong>38</strong></td><td class="center">0</td><td class="center">0</td><td class="center">38</td></tr>
-                        <tr><td>IAI</td><td class="center"><strong>18</strong></td><td class="center">0</td><td class="center">0</td><td class="center">18</td></tr>
-                        <tr><td>JVE</td><td class="center"><strong>23</strong></td><td class="center">0</td><td class="center">0</td><td class="center">23</td></tr>
-                        <tr><td>LDA</td><td class="center"><strong>31</strong></td><td class="center">31</td><td class="center">0</td><td class="center">0</td></tr>
-                        <tr><td>LGS</td><td class="center"><strong>13</strong></td><td class="center">0</td><td class="center">0</td><td class="center">13</td></tr>
-                        <tr><td>MGA</td><td class="center"><strong>37</strong></td><td class="center">37</td><td class="center">0</td><td class="center">0</td></tr>
-                        <tr><td>NHO</td><td class="center"><strong>24</strong></td><td class="center">0</td><td class="center">24</td><td class="center">0</td></tr>
-                        <tr><td>OSR</td><td class="center"><strong>14</strong></td><td class="center">0</td><td class="center">14</td><td class="center">0</td></tr>
-                        <tr><td>PAS</td><td class="center"><strong>27</strong></td><td class="center">0</td><td class="center">27</td><td class="center">0</td></tr>
-                        <tr><td>PLT</td><td class="center"><strong>31</strong></td><td class="center">0</td><td class="center">31</td><td class="center">0</td></tr>
-                        <tr><td>POA</td><td class="center"><strong>51</strong></td><td class="center">0</td><td class="center">51</td><td class="center">0</td></tr>
-                        <tr><td>SAN</td><td class="center"><strong>17</strong></td><td class="center">0</td><td class="center">17</td><td class="center">0</td></tr>
-                        <tr><td>SCR</td><td class="center"><strong>26</strong></td><td class="center">0</td><td class="center">26</td><td class="center">0</td></tr>
-                        <tr><td>SJP</td><td class="center"><strong>46</strong></td><td class="center">46</td><td class="center">0</td><td class="center">0</td></tr>
-                        <tr><td>SMA</td><td class="center"><strong>40</strong></td><td class="center">0</td><td class="center">40</td><td class="center">0</td></tr>
-                        <tr class="table-total"><td>TOTAL</td><td class="center"><strong>672</strong></td><td class="center">208</td><td class="center">300</td><td class="center">164</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <p class="note">📝 Total de Centrais Únicas na Base_Final = 672. Cada central possui apenas um tipo de pagamento. Atualizado em: 09/07/2026.</p>
         </div>
-        <!-- Footer -->
+
+        <div class="section">
+            <div class="section-title">🏢 SITES ÚNICOS POR CM</div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>CM</th>
+                            <th class="center">Sites Únicos</th>
+                            <th class="center" colspan="2">🟦 CUSTO FIXO - Ab.</th>
+                            <th class="center" colspan="2">🟦 CUSTO FIXO - Exec.</th>
+                            <th class="center" colspan="2">🟪 SOB DEMANDA - Ab.</th>
+                            <th class="center" colspan="2">🟪 SOB DEMANDA - Exec.</th>
+                            <th class="center" colspan="2">⚠️ PEND. APROVAÇÃO</th>
+                        </tr>
+                        <tr>
+                            <th></th><th></th>
+                            <th class="center">Qtd</th><th class="center">%</th>
+                            <th class="center">Qtd</th><th class="center">%</th>
+                            <th class="center">Qtd</th><th class="center">%</th>
+                            <th class="center">Qtd</th><th class="center">%</th>
+                            <th class="center">Sites</th><th class="center">%</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="badge badge-purple">CAN</span></td>
+                            <td class="center">34</td>
+                            <td class="center">20</td><td class="center">76,9%</td>
+                            <td class="center">6</td><td class="center">23,1%</td>
+                            <td class="center">3</td><td class="center">37,5%</td>
+                            <td class="center">5</td><td class="center">62,5%</td>
+                            <td class="center">5</td><td class="center">14,7%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">CCO</span></td>
+                            <td class="center">20</td>
+                            <td class="center">11</td><td class="center">68,8%</td>
+                            <td class="center">5</td><td class="center">31,3%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
+                            <td class="center">4</td><td class="center">100,0%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">CSC</span></td>
+                            <td class="center">34</td>
+                            <td class="center">16</td><td class="center">59,3%</td>
+                            <td class="center">11</td><td class="center">40,7%</td>
+                            <td class="center">3</td><td class="center">42,9%</td>
+                            <td class="center">4</td><td class="center">57,1%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">CSL</span></td>
+                            <td class="center">36</td>
+                            <td class="center">23</td><td class="center">79,3%</td>
+                            <td class="center">6</td><td class="center">20,7%</td>
+                            <td class="center">2</td><td class="center">28,6%</td>
+                            <td class="center">5</td><td class="center">71,4%</td>
+                            <td class="center">3</td><td class="center">8,3%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">CTA</span></td>
+                            <td class="center">60</td>
+                            <td class="center">36</td><td class="center">72,0%</td>
+                            <td class="center">14</td><td class="center">28,0%</td>
+                            <td class="center">8</td><td class="center">80,0%</td>
+                            <td class="center">2</td><td class="center">20,0%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">CUA</span></td>
+                            <td class="center">17</td>
+                            <td class="center">7</td><td class="center">53,8%</td>
+                            <td class="center">6</td><td class="center">46,2%</td>
+                            <td class="center">1</td><td class="center">25,0%</td>
+                            <td class="center">3</td><td class="center">75,0%</td>
+                            <td class="center">1</td><td class="center">5,9%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">FNS</span></td>
+                            <td class="center">38</td>
+                            <td class="center">18</td><td class="center">56,3%</td>
+                            <td class="center">14</td><td class="center">43,8%</td>
+                            <td class="center">1</td><td class="center">16,7%</td>
+                            <td class="center">5</td><td class="center">83,3%</td>
+                            <td class="center">2</td><td class="center">5,3%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">IAI</span></td>
+                            <td class="center">18</td>
+                            <td class="center">15</td><td class="center">100,0%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
+                            <td class="center">2</td><td class="center">66,7%</td>
+                            <td class="center">1</td><td class="center">33,3%</td>
+                            <td class="center">1</td><td class="center">5,6%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">JVE</span></td>
+                            <td class="center">23</td>
+                            <td class="center">20</td><td class="center">95,2%</td>
+                            <td class="center">1</td><td class="center">4,8%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
+                            <td class="center">2</td><td class="center">100,0%</td>
+                            <td class="center">2</td><td class="center">8,7%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">LDA</span></td>
+                            <td class="center">31</td>
+                            <td class="center">15</td><td class="center">55,6%</td>
+                            <td class="center">12</td><td class="center">44,4%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
+                            <td class="center">4</td><td class="center">100,0%</td>
+                            <td class="center">6</td><td class="center">19,4%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">LGS</span></td>
+                            <td class="center">13</td>
+                            <td class="center">9</td><td class="center">75,0%</td>
+                            <td class="center">3</td><td class="center">25,0%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
+                            <td class="center">1</td><td class="center">100,0%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">MGA</span></td>
+                            <td class="center">37</td>
+                            <td class="center">20</td><td class="center">74,1%</td>
+                            <td class="center">7</td><td class="center">25,9%</td>
+                            <td class="center">3</td><td class="center">30,0%</td>
+                            <td class="center">7</td><td class="center">70,0%</td>
+                            <td class="center">2</td><td class="center">5,4%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">NHO</span></td>
+                            <td class="center">24</td>
+                            <td class="center">12</td><td class="center">80,0%</td>
+                            <td class="center">3</td><td class="center">20,0%</td>
+                            <td class="center">5</td><td class="center">55,6%</td>
+                            <td class="center">4</td><td class="center">44,4%</td>
+                            <td class="center">1</td><td class="center">4,2%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">OSR</span></td>
+                            <td class="center">14</td>
+                            <td class="center">6</td><td class="center">75,0%</td>
+                            <td class="center">2</td><td class="center">25,0%</td>
+                            <td class="center">4</td><td class="center">66,7%</td>
+                            <td class="center">2</td><td class="center">33,3%</td>
+                            <td class="center">1</td><td class="center">7,1%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">PAS</span></td>
+                            <td class="center">27</td>
+                            <td class="center">16</td><td class="center">76,2%</td>
+                            <td class="center">5</td><td class="center">23,8%</td>
+                            <td class="center">2</td><td class="center">33,3%</td>
+                            <td class="center">4</td><td class="center">66,7%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">PLT</span></td>
+                            <td class="center">31</td>
+                            <td class="center">7</td><td class="center">26,9%</td>
+                            <td class="center">19</td><td class="center">73,1%</td>
+                            <td class="center">4</td><td class="center">80,0%</td>
+                            <td class="center">1</td><td class="center">20,0%</td>
+                            <td class="center">3</td><td class="center">9,7%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">POA</span></td>
+                            <td class="center">51</td>
+                            <td class="center">22</td><td class="center">59,5%</td>
+                            <td class="center">15</td><td class="center">40,5%</td>
+                            <td class="center">5</td><td class="center">35,7%</td>
+                            <td class="center">9</td><td class="center">64,3%</td>
+                            <td class="center">1</td><td class="center">2,0%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">SAN</span></td>
+                            <td class="center">17</td>
+                            <td class="center">10</td><td class="center">90,9%</td>
+                            <td class="center">1</td><td class="center">9,1%</td>
+                            <td class="center">4</td><td class="center">66,7%</td>
+                            <td class="center">2</td><td class="center">33,3%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">SCR</span></td>
+                            <td class="center">26</td>
+                            <td class="center">7</td><td class="center">35,0%</td>
+                            <td class="center">13</td><td class="center">65,0%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
+                            <td class="center">6</td><td class="center">100,0%</td>
+                            <td class="center">1</td><td class="center">3,8%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">SJP</span></td>
+                            <td class="center">46</td>
+                            <td class="center">25</td><td class="center">80,6%</td>
+                            <td class="center">6</td><td class="center">19,4%</td>
+                            <td class="center">12</td><td class="center">80,0%</td>
+                            <td class="center">3</td><td class="center">20,0%</td>
+                            <td class="center">6</td><td class="center">13,0%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">SMA</span></td>
+                            <td class="center">40</td>
+                            <td class="center">22</td><td class="center">64,7%</td>
+                            <td class="center">12</td><td class="center">35,3%</td>
+                            <td class="center">3</td><td class="center">50,0%</td>
+                            <td class="center">3</td><td class="center">50,0%</td>
+                            <td class="center">1</td><td class="center">2,5%</td>
+                        </tr>
+                        <tr class="table-total">
+                            <td><strong>TOTAL</strong></td>
+                            <td class="center"><strong>672</strong></td>
+                            <td class="center">356</td><td class="center">67,9%</td>
+                            <td class="center">168</td><td class="center">32,1%</td>
+                            <td class="center">64</td><td class="center">43,2%</td>
+                            <td class="center">84</td><td class="center">56,8%</td>
+                            <td class="center">40</td><td class="center">6,0%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🏢 SITES ÚNICOS POR COORDENADOR</div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>COORDENADOR</th>
+                            <th class="center">Sites Únicos</th>
+                            <th class="center" colspan="2">🟦 CUSTO FIXO - Ab.</th>
+                            <th class="center" colspan="2">🟦 CUSTO FIXO - Exec.</th>
+                            <th class="center" colspan="2">🟪 SOB DEMANDA - Ab.</th>
+                            <th class="center" colspan="2">🟪 SOB DEMANDA - Exec.</th>
+                            <th class="center" colspan="2">⚠️ PEND. APROVAÇÃO</th>
+                        </tr>
+                        <tr>
+                            <th></th><th></th>
+                            <th class="center">Qtd</th><th class="center">%</th>
+                            <th class="center">Qtd</th><th class="center">%</th>
+                            <th class="center">Qtd</th><th class="center">%</th>
+                            <th class="center">Qtd</th><th class="center">%</th>
+                            <th class="center">Sites</th><th class="center">%</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="badge badge-purple">ALEXANDRE MAZONI</span></td>
+                            <td class="center">55</td>
+                            <td class="center">25</td><td class="center">55,6%</td>
+                            <td class="center">20</td><td class="center">44,4%</td>
+                            <td class="center">2</td><td class="center">20,0%</td>
+                            <td class="center">8</td><td class="center">80,0%</td>
+                            <td class="center">3</td><td class="center">5,5%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">ANDERSON PARENTE</span></td>
+                            <td class="center">71</td>
+                            <td class="center">29</td><td class="center">48,3%</td>
+                            <td class="center">31</td><td class="center">51,7%</td>
+                            <td class="center">7</td><td class="center">63,6%</td>
+                            <td class="center">4</td><td class="center">36,4%</td>
+                            <td class="center">4</td><td class="center">5,6%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">ANDREI ROSSI</span></td>
+                            <td class="center">48</td>
+                            <td class="center">26</td><td class="center">76,5%</td>
+                            <td class="center">8</td><td class="center">23,5%</td>
+                            <td class="center">7</td><td class="center">50,0%</td>
+                            <td class="center">7</td><td class="center">50,0%</td>
+                            <td class="center">6</td><td class="center">12,5%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">CARLOS PREIS</span></td>
+                            <td class="center">76</td>
+                            <td class="center">54</td><td class="center">87,1%</td>
+                            <td class="center">8</td><td class="center">12,9%</td>
+                            <td class="center">4</td><td class="center">28,6%</td>
+                            <td class="center">10</td><td class="center">71,4%</td>
+                            <td class="center">7</td><td class="center">9,2%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">ELENICE CONRAD</span></td>
+                            <td class="center">60</td>
+                            <td class="center">36</td><td class="center">72,0%</td>
+                            <td class="center">14</td><td class="center">28,0%</td>
+                            <td class="center">8</td><td class="center">80,0%</td>
+                            <td class="center">2</td><td class="center">20,0%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">ESDRAS VIEIRA</span></td>
+                            <td class="center">44</td>
+                            <td class="center">26</td><td class="center">81,3%</td>
+                            <td class="center">6</td><td class="center">18,8%</td>
+                            <td class="center">6</td><td class="center">50,0%</td>
+                            <td class="center">6</td><td class="center">50,0%</td>
+                            <td class="center">0</td><td class="center">0,0%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">JULIANO RONI MORAS</span></td>
+                            <td class="center">104</td>
+                            <td class="center">56</td><td class="center">68,3%</td>
+                            <td class="center">26</td><td class="center">31,7%</td>
+                            <td class="center">6</td><td class="center">27,3%</td>
+                            <td class="center">16</td><td class="center">72,7%</td>
+                            <td class="center">2</td><td class="center">1,9%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">LUCAS BARROS</span></td>
+                            <td class="center">77</td>
+                            <td class="center">40</td><td class="center">69,0%</td>
+                            <td class="center">18</td><td class="center">31,0%</td>
+                            <td class="center">12</td><td class="center">63,2%</td>
+                            <td class="center">7</td><td class="center">36,8%</td>
+                            <td class="center">12</td><td class="center">15,6%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">LUIS AUGUSTO</span></td>
+                            <td class="center">77</td>
+                            <td class="center">29</td><td class="center">50,9%</td>
+                            <td class="center">28</td><td class="center">49,1%</td>
+                            <td class="center">5</td><td class="center">25,0%</td>
+                            <td class="center">15</td><td class="center">75,0%</td>
+                            <td class="center">2</td><td class="center">2,6%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">MAURICIO SPERAFICO</span></td>
+                            <td class="center">60</td>
+                            <td class="center">35</td><td class="center">79,5%</td>
+                            <td class="center">9</td><td class="center">20,5%</td>
+                            <td class="center">7</td><td class="center">43,8%</td>
+                            <td class="center">9</td><td class="center">56,3%</td>
+                            <td class="center">4</td><td class="center">6,7%</td>
+                        </tr>
+                        <tr class="table-total">
+                            <td><strong>TOTAL</strong></td>
+                            <td class="center"><strong>672</strong></td>
+                            <td class="center">356</td><td class="center">67,9%</td>
+                            <td class="center">168</td><td class="center">32,1%</td>
+                            <td class="center">64</td><td class="center">43,2%</td>
+                            <td class="center">84</td><td class="center">56,8%</td>
+                            <td class="center">40</td><td class="center">6,0%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
         <footer class="footer">
             <p>📊 Painel de Gestão de Ordens de Serviço | Atualizado em: 09/07/2026</p>
-            <p>Dados extraídos do sistema de gestão de manutenção</p>
+            <p>Dados extraídos do Painel_Gestao</p>
         </footer>
     </div>
 </body>
